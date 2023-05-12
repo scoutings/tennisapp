@@ -34,7 +34,11 @@ let init = (app) => {
     app.vue = new Vue({
         el: '#app',
         data: {
-            pagetitle: 'Match Point Central'
+            pagetitle: 'Match Point Central',
+            apply: 'Apply',
+            journey: 'Start Your Journey',
+            user: 'User',
+            slogan: 'Game, Set, Match: \n Your ultimate tennis decision'
         }
        // data: app.data,
         //methods: app.methods
