@@ -3,13 +3,33 @@
 <style>
 [v-cloak] {
      display: none;
+
+}
+
+#app p {
+  color: green;
+  font-size: 30px;
+  position: absolute;
+  top: 100px;
+  left: 50px;
+  mix-blend-mode: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#hr {
+  border-top: 2px solid green;
+  position: relative;
+  top: 70px;
 }
 </style>
 
+  <div id = "app" v-cloak>
+    <p>{{ pagetitle }}</p>
+  </div>   
+  <hr id = "hr">
 
-<div class="section" id="vue-target" v-cloak>
+    
   <!-- Put here your Vue.js template -->
-</div>
 
 
 [[block page_scripts]]
@@ -17,5 +37,7 @@
 <script>
   let my_callback_url = "[[=XML(my_callback_url)]]";
 </script>
-<script src="js/index.js"></script>
+
+  <script src = "../static/js/index.js">
+</script>
 [[end]]

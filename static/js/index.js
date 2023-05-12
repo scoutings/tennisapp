@@ -6,9 +6,12 @@ let app = {};
 // Given an empty app object, initializes it filling its attributes,
 // creates a Vue instance, and then initializes the Vue instance.
 let init = (app) => {
+    
 
+    /*
     // This is the Vue data.
     app.data = {
+        pagetitle: "Match Point Central"
         // Complete as you see fit.
     };
 
@@ -18,6 +21,8 @@ let init = (app) => {
         a.map((e) => {e._idx = k++;});
         return a;
     };
+    */
+    
 
 
     // This contains all the methods.
@@ -27,9 +32,12 @@ let init = (app) => {
 
     // This creates the Vue instance.
     app.vue = new Vue({
-        el: "#vue-target",
-        data: app.data,
-        methods: app.methods
+        el: '#app',
+        data: {
+            pagetitle: 'Match Point Central'
+        }
+       // data: app.data,
+        //methods: app.methods
     });
 
     // And this initializes it.
