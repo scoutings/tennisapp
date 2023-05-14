@@ -10,29 +10,30 @@
 }
 
 </style>
-
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
   </head>
   <body>
     <div id = "app">
-    <nav class = "navbar navbar-expand lg navbar-light bg-light">
-      <div class = "container-fluid">
-        <a class = "navbar-brand" href = "#">Match Point Central</a>
-        <ul class = "navbar-nav me-auto mb-2 mg-lg-0">
-          <li class = "nav-item">
-            <a class = "nav-x" aria-current="page" href = "#">{{ apply }}</a>
-          </li>
-          <li class = "nav-item">
-            <a class = "nav-x" aria-current="page" href = "#">{{ journey }}</a>
-          </li>
-          <li class = "nav-item">
-            <a class = "nav-x" aria-current="page" href = "#">{{ user }}</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <h4>{{ slogan }}</h4>
+      <nav class = "navbar navbar-expand lg navbar-light bg-light"> <!--created a navigation bar: (navbar-expand lg = expandable) (bg-light: background color)-->
+        <div class = "container-fluid"> <!--for proper alignment-->
+          <a class = "navbar-brand" href = "index.html">{{pagetitle}}</a>  <!--Adds a title to the nav bar-->
+          <ul class = "navbar-nav me-auto mb-2 mg-lg-0">    <!--Unordered list that will contain the navigation items ('li')-->
+            <li class = "nav-item">
+              <a class = "nav-x" aria-current="page" href = "apply.html">{{ apply }}</a>
+            </li>
+            <li class = "nav-item">
+              <a class = "nav-x" aria-current="page" href = "#">{{ journey }}</a>
+            </li>
+            <li class = "nav-item">
+              <a class = "nav-x" aria-current="page" href = "#">{{ user }}</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <h4>{{ slogan }}</h4>
+    </div>
+  </body>
 
   <!-- Put here your Vue.js template -->
 

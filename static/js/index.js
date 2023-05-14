@@ -8,13 +8,16 @@ let app = {};
 let init = (app) => {
     
 
-    /*
+    
     // This is the Vue data.
     app.data = {
-        pagetitle: "Match Point Central"
-        // Complete as you see fit.
+        pagetitle: 'Match Point Central',
+        apply: ' Apply ',
+        journey: 'Start Your Journey',
+        user: 'User',
+        slogan: 'Game, Set, Match: \n Your ultimate tennis decision',
     };
-
+/*
     app.enumerate = (a) => {
         // This adds an _idx field to each element of the array.
         let k = 0;
@@ -33,14 +36,7 @@ let init = (app) => {
     // This creates the Vue instance.
     app.vue = new Vue({
         el: '#app',
-        data: {
-            pagetitle: 'Match Point Central',
-            apply: ' Apply ',
-            journey: 'Start Your Journey',
-            user: 'User',
-            slogan: 'Game, Set, Match: \n Your ultimate tennis decision'
-        }
-       // data: app.data,
+        data: app.data,
         //methods: app.methods
     });
 
