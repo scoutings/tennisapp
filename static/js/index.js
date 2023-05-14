@@ -35,7 +35,7 @@ let init = (app) => {
         el: '#app',
         data: {
             pagetitle: 'Match Point Central',
-            apply: 'Apply',
+            apply: ' Apply ',
             journey: 'Start Your Journey',
             user: 'User',
             slogan: 'Game, Set, Match: \n Your ultimate tennis decision'
