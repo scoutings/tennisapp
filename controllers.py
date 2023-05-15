@@ -39,37 +39,37 @@ url_signer = URLSigner(session)
 def index():
     return dict()
 
-@action('coaching_apply', method=["GET", "POST"])
+@action('coaching_apply')
 @action.uses('coaching_apply.html', db, auth.user, url_signer)
 def coaching_apply():
-    form = Form([
-                    Field('phone_number'),
-                    Field('state'),
-                    Field('city'),
-                    Field('about')
-                ],
-                csrf_session=session,
-                formstyle=FormStyleBulma
-                )
-    if form.accepted:
-        db.coaches.insert(
-                    phone_num_coach=form.vars['phone_number'],
-                    state_coach=form.vars['state'],
-                    city_coach=form.vars['city'],
-                    about_coach=form.vars['about']
-                )
-        # Todo find a better redirect
-        redirect(URL('index'))
     ret_val = dict(
-                form=form,
-                get_iscoach_url=URL('get_iscoach', signer=url_signer)
+                get_iscoach_url=URL('get_iscoach', signer=url_signer),
+                add_coach_url=URL('add_coach', signer=url_signer)
             )
     return ret_val
+
+# ============= API =============
 
 @action('get_iscoach')
 @action.uses(url_signer.verify(), db, auth.user)
 def get_iscoach():
     is_coach = db(db.coaches.user_id == auth.current_user.get('id')).count() == 1
+    print(f"is_coach: {is_coach}")
     return dict(
-            is_coach=is_coach
-        )
+                is_coach=is_coach
+            )
+
+@action('add_coach', method="POST")
+@action.uses(url_signer.verify(), db, auth.user)
+def add_caoch():
+    print("Adding a caoch")
+    id = db.coaches.insert(
+                user_id=auth.current_user.get('id'),
+                phone_number_coach=request.json.get('phone_number'),
+                state_coach=request.json.get('state'),
+                city_coach=request.json.get('city'),
+                about_coach=request.json.get('about')
+            )
+    return dict(
+                id=id
+            )

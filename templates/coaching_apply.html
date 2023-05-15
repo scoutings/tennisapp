@@ -11,17 +11,45 @@
 <div class="section" id="vue-target">
   <!-- Put here your Vue.js template -->
 
+  <div v-if="!is_coach" class="container block">
+    <div class="section">
+      <h1 class="title">Apply to become a Coach</h1>
+      <div class="field">
+        <label class="label">Phone Number:</label>
+        <div class="control">
+          <input type="text" v-model="add_phone_number" class="input">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">State:</label>
+        <div class="control">
+          <input type="text" v-model="add_state" class="input">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">City:</label>
+        <div class="control">
+          <input type="text" v-model="add_city" class="input">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">About:</label>
+        <div class="control">
+          <input type="text" v-model="add_about" class="input">
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <input type="submit" @click="add_coach" value="add" class="button is-success">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div v-if="is_coach" class="container block">
-    <h1 class="title">You are a coach</h1>
+    <h1 class="title">Thank you for applying!</h1>
   </div>
 
-  <div class="section">
-
-    <h1 class="title">Apply to become a Coach</h1>
-
-    [[=form]]
-
-  </div>
 </div>
 
 
@@ -29,6 +57,7 @@
 <!-- Loads the index-specific js for Vue -->
 <script>
   let get_iscoach_url = "[[=XML(get_iscoach_url)]]";
+  let add_coach_url = "[[=XML(add_coach_url)]]";
 </script>
 <script src="../static/js/coaching_apply.js"></script>
 [[end]]
