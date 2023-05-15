@@ -13,8 +13,6 @@
     <!-- Navigation bar -->
     <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-
-
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="the-navbar-menu"
            onclick="this.classList.toggle('is-active');document.getElementById(this.dataset.target).classList.toggle('is-active');">
           <span aria-hidden="true"></span>
@@ -25,32 +23,24 @@
 
       <div id="the-navbar-menu" class="navbar-menu">
         <div class="navbar-start">
-
-          <a class="navbar-item" href="[[=URL('index')]]">Home</a>
-
+          <a class="navbar-item" href="[[=URL('index')]]">Match Point Central</a>
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link is-primary">
-              Apply
-            </a>
+            <a class="navbar-link is-primary">Apply</a>
             <div class="navbar-dropdown">
-              <a class="navbar-item" href="[[=URL('coaching_apply')]]">Coaching</a>
-              <a class="navbar-item" href="[[=URL('stringing_apply')]]">Stringing</a>
+              <a class="navbar-item" href="[[=URL('coaching_apply')]]">Become A Coach</a>
+              <a class="navbar-item" href="[[=URL('stringing_apply')]]">Become A Stringer</a>
             </div>
           </div>
-
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link is-primary">
-              Start your Journey
-            </a>
+            <a class="navbar-link is-primary">Start Your Journey</a>
             <div class="navbar-dropdown">
-              <a class="navbar-item" href="[[=URL('coaching_apply')]]">Coaching</a>
-              <a class="navbar-item" href="[[=URL('stringing_apply')]]">Stringing</a>
+              <a class="navbar-item" href="[[=URL('coaching_find')]]">Find A Coach</a>
+              <a class="navbar-item" href="[[=URL('stringing_find')]]">Find A Stringer</a>
             </div>
           </div>
 
           [[block page_menu_items]]<!-- individual pages can add menu items here -->[[end]]
         </div>
-
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
@@ -63,12 +53,11 @@
                     <a class="navbar-item" href="[[=URL('auth/logout')]]">Logout</a>
                     <a class="navbar-item" href="[[=URL('auth/profile')]]">Profile</a>
                     <a class="navbar-item" href="[[=URL('auth/change_password')]]">Change Password</a></li>
-
                   </div>
                 </div>
               [[else:]]
-                <a class="button is-link" href="[[=URL('auth/register')]]">Sign up</a>
-                <a class="button is-success" href="[[=URL('auth/login')]]">Log in</a>
+                <a class="button is-link" href="[[=URL('auth/register')]]">Sign Up</a>
+                <a class="button is-success" href="[[=URL('auth/login')]]">Log In</a>
               [[pass]]
             </div>
           </div>

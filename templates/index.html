@@ -1,20 +1,33 @@
 [[extend 'layout.html']]
 
 <style>
-[v-cloak] {
-     display: none;
-}
+  body{
+    background-image: url('https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/goslugs.com/images/2020/3/3/concordia_rotator-redesign.jpg');
+    background-repeat: no-repeat;
+    height: 900px;
+    background-size: cover;
+  }
 </style>
 
+<head>
+  <link rel="stylesheet" href="css/bulma.css">
+</head>
 
+<body>
 
-<div class="section" id="vue-target">
-  <!-- Put here your Vue.js template -->
-  <h1 class="title">Game, Set, Match: Your ultimate tennis decision</h1>
-</div>
-
-
+  <div class="section" id="vue-target">
+    <div class = "buttons is-centered">
+      <div class = "columns">
+        <div class = "column is-three-fifths is-offset-one-fifth">
+          <h1 class="title">Find Tennis Coaches and Stringers Near You!</h1>
+          <a href= "[[=URL('coaching_find')]]" class = "button is-primary">Find Tennis Coach</a>
+          <a href = "[[=URL('stringing_find')]]" class = "button is-primary">Find Stringer</a>
+        </div>
+    </div>
+  </div>
+</body>
 [[block page_scripts]]
+
 <!-- Loads the index-specific js for Vue -->
 <script>
 </script>
