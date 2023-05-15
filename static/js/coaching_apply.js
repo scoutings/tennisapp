@@ -11,6 +11,7 @@ let init = (app) => {
     
     // This is the Vue data.
     app.data = {
+        is_coach: false
     };
 /*
     app.enumerate = (a) => {
@@ -30,7 +31,7 @@ let init = (app) => {
 
     // This creates the Vue instance.
     app.vue = new Vue({
-        el: '#app',
+        el: '#vue-target',
         data: app.data,
         //methods: app.methods
     });
@@ -39,6 +40,9 @@ let init = (app) => {
     app.init = () => {
         // Put here any initialization code.
         // Typically this is a server GET call to load the data.
+        axios.get(get_iscoach_url).then(function (response) {
+            app.vue.is_coach = response.data.is_coach;
+        });
     };
 
     // Call to the initializer.

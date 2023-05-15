@@ -43,3 +43,14 @@ success!
 timestamp: 2023-05-14T18:51:53.244774
 ALTER TABLE "coaches" ADD "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ;
 success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
