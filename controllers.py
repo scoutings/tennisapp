@@ -61,6 +61,15 @@ def coaching_apply():
         # Todo find a better redirect
         redirect(URL('index'))
     ret_val = dict(
-                form=form
+                form=form,
+                get_iscoach_url=URL('get_iscoach', signer=url_signer)
             )
     return ret_val
+
+@action('get_iscoach')
+@action.uses(url_signer.verify(), db, auth.user)
+def get_iscoach():
+    is_coach = db(db.coaches.user_id == auth.current_user.get('id')).count() == 1
+    return dict(
+            is_coach=is_coach
+        )
