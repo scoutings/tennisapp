@@ -28,3 +28,18 @@ CREATE TABLE "auth_user_tag_groups"(
     "record_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  
 );
 success!
+timestamp: 2023-05-11T22:35:52.943407
+CREATE TABLE "coaches"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "first_name_coach" CHAR(512),
+    "last_name_coach" CHAR(512),
+    "email_coach" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "phone_num_coach" CHAR(512),
+    "state_coach" CHAR(512),
+    "city_coach" CHAR(512),
+    "about_coach" CHAR(512)
+);
+success!
+timestamp: 2023-05-14T18:51:53.244774
+ALTER TABLE "coaches" ADD "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ;
+success!

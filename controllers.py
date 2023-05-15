@@ -25,10 +25,11 @@ session, db, T, auth, and tempates are examples of Fixtures.
 Warning: Fixtures MUST be declared with @action.uses({fixtures}) else your app will result in undefined behavior
 """
 
-from py4web import action, request, abort, redirect, URL
+from py4web import action, request, abort, redirect, URL, Field
 from yatl.helpers import A
 from .common import db, session, T, cache, auth, logger, authenticated, unauthenticated, flash
 from py4web.utils.url_signer import URLSigner
+from py4web.utils.form import Form, FormStyleBulma
 from .models import get_user_email
 
 url_signer = URLSigner(session)
@@ -36,7 +37,30 @@ url_signer = URLSigner(session)
 @action('index')
 @action.uses('index.html', db, auth, url_signer)
 def index():
-    return dict(
-        # COMPLETE: return here any signed URLs you need.
-        my_callback_url = URL('my_callback', signer=url_signer),
-    )
+    return dict()
+
+@action('coaching_apply', method=["GET", "POST"])
+@action.uses('coaching_apply.html', db, auth.user, url_signer)
+def coaching_apply():
+    form = Form([
+                    Field('phone_number'),
+                    Field('state'),
+                    Field('city'),
+                    Field('about')
+                ],
+                csrf_session=session,
+                formstyle=FormStyleBulma
+                )
+    if form.accepted:
+        db.coaches.insert(
+                    phone_num_coach=form.vars['phone_number'],
+                    state_coach=form.vars['state'],
+                    city_coach=form.vars['city'],
+                    about_coach=form.vars['about']
+                )
+        # Todo find a better redirect
+        redirect(URL('index'))
+    ret_val = dict(
+                form=form
+            )
+    return ret_val

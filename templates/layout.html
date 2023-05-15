@@ -25,6 +25,29 @@
 
       <div id="the-navbar-menu" class="navbar-menu">
         <div class="navbar-start">
+
+          <a class="navbar-item" href="[[=URL('index')]]">Home</a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link is-primary">
+              Apply
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="[[=URL('coaching_apply')]]">Coaching</a>
+              <a class="navbar-item" href="[[=URL('stringing_apply')]]">Stringing</a>
+            </div>
+          </div>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link is-primary">
+              Start your Journey
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="[[=URL('coaching_apply')]]">Coaching</a>
+              <a class="navbar-item" href="[[=URL('stringing_apply')]]">Stringing</a>
+            </div>
+          </div>
+
           [[block page_menu_items]]<!-- individual pages can add menu items here -->[[end]]
         </div>
 

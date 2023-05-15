@@ -20,4 +20,12 @@ def get_time():
 #
 ## always commit your models to avoid problems later
 
+db.define_table('coaches',
+                Field('user_id', 'reference auth_user', default=lambda: auth.current_user.get('id')),
+                Field('phone_num_coach'),
+                Field('state_coach'),
+                Field('city_coach'),
+                Field('about_coach')
+                )
+
 db.commit()
