@@ -48,7 +48,14 @@ def coaching_apply():
             )
     return ret_val
 
+@action('coaching_find')
+@action.uses('coaching_find.html', db, auth.user, url_signer)
+def coaching_find():
+    return dict()
+
+
 # ============= API =============
+
 
 @action('get_iscoach')
 @action.uses(url_signer.verify(), db, auth.user)

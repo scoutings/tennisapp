@@ -1,0 +1,42 @@
+[[extend 'layout.html']]
+
+<style>
+[v-cloak] {
+     display: none;
+}
+
+.photo{
+    background-image: url('https://cdn.wallpapersafari.com/58/62/M2m5hp.jpg');
+}
+
+.searchbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh; 
+    position: absolute;
+    left: 135px;
+}
+
+h1{
+    text-align: center;
+    position: absolute;
+    top: 150px;
+    left: 600px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+</style>
+
+<div class = "photo">
+    <h1>Find Your Coach</h1>
+    <div class = "searchbar">
+        <div class = "columns">
+            <div class = "column is-11 is-offset-1">
+                <input class = "input is-rounded" type = "text" placeholder = "Search State">
+            </div>
+            <div class = "column is-11 is-offset-1">
+                <input class = "input is-rounded" type = "text" placeholder = "Search City">
+            </div>
+        </div>
+    </div>
+</div>
