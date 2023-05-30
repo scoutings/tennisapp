@@ -64,19 +64,29 @@ def get_iscoach():
     print(f"is_coach: {is_coach}")
     return dict(
                 is_coach=is_coach
-            )
+    )
+
 
 @action('add_coach', method="POST")
 @action.uses(url_signer.verify(), db, auth.user)
-def add_caoch():
-    print("Adding a caoch")
+def add_coach():  # Corrected function name
+    print("Adding a coach")
     id = db.coaches.insert(
-                user_id=auth.current_user.get('id'),
-                phone_number_coach=request.json.get('phone_number'),
-                state_coach=request.json.get('state'),
-                city_coach=request.json.get('city'),
-                about_coach=request.json.get('about')
-            )
+        user_id=auth.current_user.get('id'),
+        phone_number=request.json.get('phone_number'),
+        state=request.json.get('state'),
+        city=request.json.get('city'),
+        about=request.json.get('about')
+    )
+    is_coach = db(db.coaches.user_id == auth.current_user.get('id')).count() == 1
     return dict(
-                id=id
-            )
+        id=id,
+        is_coach=is_coach,
+        phone_number=request.json.get('phone_number'),
+        state=request.json.get('state'),
+        city=request.json.get('city'),
+        about=request.json.get('about'),
+        add_private_rate=request.json.get('add_private_rate')
+    )
+
+

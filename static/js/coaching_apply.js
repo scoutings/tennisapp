@@ -15,7 +15,11 @@ let init = (app) => {
         add_phone_number: "",
         add_state: "",
         add_city: "",
-        add_about: ""
+        add_about: "",
+        add_experience: "",
+        add_private_rate: "",
+        add_hitting_rate: "",
+        coach_data: null,
     };
 
     app.set_iscoach = function () {
@@ -29,21 +33,51 @@ let init = (app) => {
         app.vue.add_state = "";
         app.vue.add_city = "";
         app.vue.add_about = "";
+        app.vue.add_experience = "";
+        app.vue.add_private_rate = "";
+        app.vue.add_hitting_rate = "";
     }
-    
+
     app.add_coach = function () {
-        // This function takes the inputs from the from in html and adds them to the database
-        axios.post(add_coach_url,
-            {
-                phone_number: app.vue.add_phone_number,
-                state: app.vue.add_state,
-                city: app.vue.add_city,
-                about: app.vue.add_about
-            }).then(function (response) {
-                app.set_iscoach();
-            });
-        app.reset_form();
-    }
+        axios.post(add_coach_url, {
+            phone_number: app.vue.add_phone_number,
+            state: app.vue.add_state,
+            city: app.vue.add_city,
+            about: app.vue.add_about,
+            add_private_rate: app.vue.add_private_rate,
+        }).then(function (response) {
+            app.vue.is_coach = true;
+            app.vue.phone_number = response.data.phone_number;
+            app.vue.state = response.data.state;
+            app.vue.city = response.data.city;
+            app.vue.about = response.data.about;
+            app.vue.add_private_rate = response.data.add_private_rate;
+            app.reset_form();
+        }).catch(function (error) {
+            console.log(error);
+        });
+    };
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 
     // This contains all the methods.
     app.methods = {
