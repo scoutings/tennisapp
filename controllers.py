@@ -49,9 +49,11 @@ def coaching_apply():
     return ret_val
 
 @action('coaching_find')
-@action.uses('coaching_find.html', db, auth.user, url_signer)
+@action.uses('coaching_find.html', db, auth, url_signer)
 def coaching_find():
-    return dict()
+    return dict(
+                get_coaches_url=URL('get_coaches', signer=url_signer)
+            )
 
 
 # ============= API =============
@@ -64,7 +66,7 @@ def get_iscoach():
     is_coach = db(db.coaches.user_id == auth.current_user.get('id')).count() == 1
     return dict(
                 is_coach=is_coach
-    )
+            )
 
 
 @action('add_coach', method="POST")
@@ -84,3 +86,11 @@ def add_coach():
                 id=id
             )
 
+@action('get_coaches')
+@action.uses(url_signer.verify(), db, auth)
+def get_coaches():
+    # Todo get the params for the query this will inckude the state and the City
+    coaches = db(db.coaches).select().as_list()
+    return dict(
+                coaches=coaches
+            )

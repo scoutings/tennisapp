@@ -144,3 +144,6 @@ timestamp: 2023-05-31T14:21:32.407902
 ALTER TABLE "coaches" ADD "hitting_rate_coach" INTEGER;
 success!
 success!
+success!
+success!
+success!
