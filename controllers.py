@@ -60,8 +60,8 @@ def coaching_find():
 @action('get_iscoach')
 @action.uses(url_signer.verify(), db, auth.user)
 def get_iscoach():
+    # If there exists a coach with this user id
     is_coach = db(db.coaches.user_id == auth.current_user.get('id')).count() == 1
-    print(f"is_coach: {is_coach}")
     return dict(
                 is_coach=is_coach
     )
@@ -69,24 +69,18 @@ def get_iscoach():
 
 @action('add_coach', method="POST")
 @action.uses(url_signer.verify(), db, auth.user)
-def add_coach():  # Corrected function name
-    print("Adding a coach")
+def add_coach():
     id = db.coaches.insert(
         user_id=auth.current_user.get('id'),
-        phone_number=request.json.get('phone_number'),
-        state=request.json.get('state'),
-        city=request.json.get('city'),
-        about=request.json.get('about')
+        phone_num_coach=request.json.get('phone_number'),
+        state_coach=request.json.get('state'),
+        city_coach=request.json.get('city'),
+        about_coach=request.json.get('about'),
+        experience_coach=request.json.get('experience'),
+        private_rate_coach=request.json.get('private_rate'),
+        hitting_rate_coach=request.json.get('hitting_rate')
     )
-    is_coach = db(db.coaches.user_id == auth.current_user.get('id')).count() == 1
     return dict(
-        id=id,
-        is_coach=is_coach,
-        phone_number=request.json.get('phone_number'),
-        state=request.json.get('state'),
-        city=request.json.get('city'),
-        about=request.json.get('about'),
-        add_private_rate=request.json.get('add_private_rate')
-    )
-
+                id=id
+            )
 

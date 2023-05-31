@@ -25,7 +25,10 @@ db.define_table('coaches',
                 Field('phone_num_coach'),
                 Field('state_coach'),
                 Field('city_coach'),
-                Field('about_coach')
+                Field('about_coach'),
+                Field('experience_coach', 'integer'),
+                Field('private_rate_coach', 'integer'),
+                Field('hitting_rate_coach', 'integer')
                 )
 
 db.commit()

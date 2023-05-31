@@ -135,3 +135,12 @@ success!
 success!
 success!
 success!
+success!
+timestamp: 2023-05-31T14:21:32.403781
+ALTER TABLE "coaches" ADD "experience_coach" INTEGER;
+timestamp: 2023-05-31T14:21:32.406823
+ALTER TABLE "coaches" ADD "private_rate_coach" INTEGER;
+timestamp: 2023-05-31T14:21:32.407902
+ALTER TABLE "coaches" ADD "hitting_rate_coach" INTEGER;
+success!
+success!

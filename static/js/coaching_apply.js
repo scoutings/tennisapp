@@ -18,8 +18,7 @@ let init = (app) => {
         add_about: "",
         add_experience: "",
         add_private_rate: "",
-        add_hitting_rate: "",
-        coach_data: null,
+        add_hitting_rate: ""
     };
 
     app.set_iscoach = function () {
@@ -44,40 +43,16 @@ let init = (app) => {
             state: app.vue.add_state,
             city: app.vue.add_city,
             about: app.vue.add_about,
-            add_private_rate: app.vue.add_private_rate,
+            experience: app.vue.add_experience,
+            private_rate: app.vue.add_private_rate,
+            hitting_rate: app.vue.add_hitting_rate
         }).then(function (response) {
-            app.vue.is_coach = true;
-            app.vue.phone_number = response.data.phone_number;
-            app.vue.state = response.data.state;
-            app.vue.city = response.data.city;
-            app.vue.about = response.data.about;
-            app.vue.add_private_rate = response.data.add_private_rate;
+            app.set_iscoach();
             app.reset_form();
         }).catch(function (error) {
             console.log(error);
         });
     };
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
 
     // This contains all the methods.
     app.methods = {

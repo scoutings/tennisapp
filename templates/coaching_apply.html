@@ -72,57 +72,56 @@ input[type="text"] {
 </style>
 
 <div class="section" id="vue-target" v-cloak>
-  <div class = "formstyle">
-  <div v-if="!is_coach" class="container block">
-    <div class="section">
-      <h1 class="title">Apply To Coach</h1>
-      <div class="field">
-        <div class="control">
-          <input type="text" placeholder = "Phone Number" v-model="add_phone_number" class="input">
+
+  <div v-if="!is_coach" class="formstyle">
+    <div class="container block">
+      <div class="section">
+        <h1 class="title">Apply To Coach</h1>
+        <div class="field">
+          <div class="control">
+            <input type="text" placeholder = "Phone Number" v-model="add_phone_number" class="input">
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <div class="control">
-          <input type="text" placeholder = "City" v-model="add_city" class="input">
+        <div class="field">
+          <div class="control">
+            <input type="text" placeholder = "City" v-model="add_city" class="input">
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <div class="control">
-          <input type="text" placeholder = "State" v-model="add_state" class="input">
+        <div class="field">
+          <div class="control">
+            <input type="text" placeholder = "State" v-model="add_state" class="input">
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <div class="control">
-          <textarea class = "textarea" placeholder="About You (Coaching, Playing Experience)" v-model="add_about"></textarea>
-          <!--<input type="text" placeholder = "About You (Coaching, Playing Experience)" v-model="add_about" class="input big-input"> -->
+        <div class="field">
+          <div class="control">
+            <textarea class = "textarea" placeholder="About You (Coaching, Playing Experience)" v-model="add_about"></textarea>
+            <!--<input type="text" placeholder = "About You (Coaching, Playing Experience)" v-model="add_about" class="input big-input"> -->
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <div class="control">
-          <input type="text" placeholder = "Coaching Years Experience" v-model="add_experience" class="input">
+        <div class="field">
+          <div class="control">
+            <input type="text" placeholder = "Coaching Years Experience" v-model="add_experience" class="input">
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <div class="control">
-          <input type="text" placeholder = "Private Tennis Lessons Rate Per Hour" v-model="add_private_rate" class="input">
+        <div class="field">
+          <div class="control">
+            <input type="text" placeholder = "Private Tennis Lessons Rate Per Hour" v-model="add_private_rate" class="input">
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <div class="control">
-          <input type="text" placeholder = "Hitting Only Sessions Rate Per Hour" v-model="add_hitting_rate" class="input">
+        <div class="field">
+          <div class="control">
+            <input type="text" placeholder = "Hitting Only Sessions Rate Per Hour" v-model="add_hitting_rate" class="input">
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <div class="control">
-          <input type="submit" @click="add_coach" value="Submit" class="button is-success">
+        <div class="field">
+          <div class="control">
+            <input type="submit" @click="add_coach" value="Submit" class="button is-success">
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="section1" id="vue-target" v-cloak>
-  <div v-if="is_coach">
+  <div v-else>
     <div class = "mt-7 photo">
       <div class = "alert">
         <div class = "columns">
@@ -137,7 +136,9 @@ input[type="text"] {
       </div>
     </div>
   </div>
+
 </div>
+
 
 
 
