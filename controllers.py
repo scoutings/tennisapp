@@ -55,6 +55,10 @@ def coaching_find():
                 get_coaches_url=URL('get_coaches', signer=url_signer)
             )
 
+@action('coaching_profile')
+@action.uses('coaching_profile.html', db, auth.user, url_signer)
+def coaching_profile():
+    return dict()
 
 # ============= API =============
 
