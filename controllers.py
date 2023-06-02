@@ -89,8 +89,14 @@ def add_coach():
 @action('get_coaches')
 @action.uses(url_signer.verify(), db, auth)
 def get_coaches():
+    '''
+        This returns a list of all the coaches. Each coach will be a dictionary of two keys:
+            'coaches': [*In here will be all the columns in the coaches table*]
+            'auth_user': [*In here will be all the columns in the auth_user table*]
+    '''
     # Todo get the params for the query this will inckude the state and the City
-    coaches = db(db.coaches).select().as_list()
+    coaches = db(db.coaches.user_id == db.auth_user.id).select().as_list()
+    print(f"coaches: {coaches}")
     return dict(
                 coaches=coaches
             )
