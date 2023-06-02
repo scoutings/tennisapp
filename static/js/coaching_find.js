@@ -9,6 +9,8 @@ let init = (app) => {
     
     // This is the Vue data.
     app.data = {
+        state_q: "",
+        city_q: "",
 	coaches: []
     };
 
@@ -20,7 +22,7 @@ let init = (app) => {
     };
 
     app.get_coaches = function () {
-        axios.get(get_coaches_url)
+        axios.get(get_coaches_url, {params: {state_q: app.vue.state_q, city_q: app.vue.city_q}})
             .then(function (response) {
                 app.vue.coaches = app.enumerate(response.data.coaches);
             });
@@ -29,13 +31,14 @@ let init = (app) => {
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
+        get_coaches: app.get_coaches
     };
 
     // This creates the Vue instance.
     app.vue = new Vue({
         el: '#vue-target',
         data: app.data,
-        //methods: app.methods
+        methods: app.methods
     });
 
     // And this initializes it.

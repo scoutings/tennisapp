@@ -43,13 +43,13 @@ h1{
     <div class = "searchbar">
         <div class = "columns">
             <div class = "column is-11 is-offset-1">
-                <input class = "input is-rounded" type = "text" placeholder = "Search State">
+                <input class = "input is-rounded" type = "text" placeholder = "Search State" v-model="state_q">
             </div>
             <div class = "column is-11 is-offset-1">
-                <input class = "input is-rounded" type = "text" placeholder = "Search City">
+                <input class = "input is-rounded" type = "text" placeholder = "Search City" v-model="city_q">
             </div>
             <div class = "column is-11 is-offset-1">
-                <button class = "button is-rounded is-primary">Find</button>
+                <button class = "button is-rounded is-primary" @click="get_coaches">Find</button>
             </div>
         </div>
     </div>
