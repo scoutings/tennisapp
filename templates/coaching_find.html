@@ -27,6 +27,14 @@ h1{
     top: 100px;
     right: 80px;
 }
+
+.coaches{
+    position: absolute;
+    margin-left: 70px;
+    margin-top: 180px;
+    border: blue;
+}
+
 </style>
 
 
@@ -45,17 +53,22 @@ h1{
             </div>
         </div>
     </div>
-
-    <div v-for="c in coaches">
-        <p>{{c.phone_num_coach}}</p>
-        <p>{{c.state_coach}}</p>
-        <p>{{c.citycoach}}</p>
-        <p>{{c.about_coach}}</p>
-        <p>{{c.experience_coach}}</p>
-        <p>{{c.private_rate_coach}}</p>
-        <p>{{c.hitting_rate_coach}}</p>
+    <div class = "coaches">
+        <div v-for="c in coaches">
+            <table class = "table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Coach {{c.auth_user.first_name}}</th>
+                        <td>About: {{c.coaches.about_coach}}</td>
+                        <td>Coaching Experience: {{c.coaches.experience_coach}} years</td> 
+                        <td>Private Rate: ${{c.coaches.private_rate_coach}}/hr</td>     
+                        <td>Hitting Rate: ${{c.coaches.hitting_rate_coach}}/hr</td> 
+                        <td><button class = "button is-info">Contact</button></td>
+                    </tr>
+                </thead>
+            </table>            
+        </div>
     </div>
-
 </div>
 
 
