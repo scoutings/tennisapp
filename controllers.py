@@ -85,7 +85,9 @@ def add_coach():
         about_coach=request.json.get('about'),
         experience_coach=request.json.get('experience'),
         private_rate_coach=request.json.get('private_rate'),
-        hitting_rate_coach=request.json.get('hitting_rate')
+        hitting_rate_coach=request.json.get('hitting_rate'),
+        semi_private_rate_coach=request.json.get('semiprivate_rate'),
+        group_rate_coach=request.json.get('group_rate'),
     )
     return dict(
                 id=id

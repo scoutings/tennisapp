@@ -28,7 +28,9 @@ db.define_table('coaches',
                 Field('about_coach'),
                 Field('experience_coach', 'integer'),
                 Field('private_rate_coach', 'integer'),
-                Field('hitting_rate_coach', 'integer')
+                Field('hitting_rate_coach', 'integer'),
+                Field('semi_private_rate_coach', 'integer'),
+                Field('group_rate_coach', 'integer')
                 )
 
 db.commit()

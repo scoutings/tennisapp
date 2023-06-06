@@ -41,8 +41,6 @@ h1{
     margin-top: 150px;
 }
 
-
-
 .box{
     margin-top: 30px;
 }
@@ -50,70 +48,53 @@ h1{
 
 <div class="section" id="vue-target" v-cloak>
     <h1>Find Your Coach</h1>
-    <div class = "searchbar">
-        <div class = "columns">
-            <div class = "column is-11 is-offset-1">
-                <input class = "input is-rounded" type = "text" placeholder = "Search State" v-model="state_q">
+    <div class="searchbar">
+        <div class="columns">
+            <div class="column is-11 is-offset-1">
+                <input class="input is-rounded" type="text" placeholder="Search State" v-model="state_q">
             </div>
-            <div class = "column is-11 is-offset-1">
-                <input class = "input is-rounded" type = "text" placeholder = "Search City" v-model="city_q">
+            <div class="column is-11 is-offset-1">
+                <input class="input is-rounded" type="text" placeholder="Search City" v-model="city_q">
             </div>
-            <div class = "column is-11 is-offset-1">
-                <button class = "button is-rounded is-primary" @click="get_coaches">Find</button>
+            <div class="column is-11 is-offset-1">
+                <button class="button is-rounded is-primary" @click="get_coaches">Find</button>
             </div>
         </div>
     </div>
-    <div v-if="coaches.length == 0" class = "no_coaches">
+    <div v-if="coaches.length === 0" class="no_coaches">
         No Coaches In This City
     </div>
     <div v-else class="coaches">
         <div v-for="c in coaches">
-            <div class = "box">
+            <div class="box">
                 <table class="table is-fullwidth">
                     <tr>
                         <th>Coach {{c.auth_user.first_name}}</th>
                         <td>
-                            <button class="button is-success is-info" @mouseover="showAbout = true" @mouseout="showAbout = false">
+                            <button class="button is-success is-info"
+                                    @mouseover="toggleAbout(c, true)"
+                                    @mouseout="toggleAbout(c, false)">
                                 Bio
                             </button>
                         </td>
                         <td>Coaching Experience: {{c.coaches.experience_coach}} years</td>
                         <td>Private Rate: ${{c.coaches.private_rate_coach}}/hr</td>
+                        <td>Semi Private Rate: ${{c.coaches.semi_private_rate_coach}}/hr</td>
+                        <td>Group Rate: ${{c.coaches.group_rate_coach}}/hr</td>
                         <td>Hitting Rate: ${{c.coaches.hitting_rate_coach}}/hr</td>
                         <td><button class="button is-info">Contact</button></td>
                     </tr>
-                    <tr v-if="showAbout">
-                        <td colspan="6" class="about-section">About: {{c.coaches.about_coach}}</td>
+                    <tr v-if="c.showAbout">
+                        <td colspan="6" class="about-section">{{c.coaches.about_coach}}</td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
-    
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 </div>
+
 
 
 

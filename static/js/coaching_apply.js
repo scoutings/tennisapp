@@ -18,7 +18,9 @@ let init = (app) => {
         add_about: "",
         add_experience: "",
         add_private_rate: "",
-        add_hitting_rate: ""
+        add_hitting_rate: "",
+        add_semiprivate_rate: "",
+        add_group_rate: "",
     };
 
     app.set_iscoach = function () {
@@ -35,6 +37,8 @@ let init = (app) => {
         app.vue.add_experience = "";
         app.vue.add_private_rate = "";
         app.vue.add_hitting_rate = "";
+        app.vue.add_semiprivate_rate = "";
+        app.vue.add_group_rate = "";
     }
 
     app.add_coach = function () {
@@ -45,7 +49,9 @@ let init = (app) => {
             about: app.vue.add_about,
             experience: app.vue.add_experience,
             private_rate: app.vue.add_private_rate,
-            hitting_rate: app.vue.add_hitting_rate
+            hitting_rate: app.vue.add_hitting_rate,
+            semiprivate_rate: app.vue.add_semiprivate_rate,
+            group_rate: app.vue.add_group_rate
         }).then(function (response) {
             app.set_iscoach();
             app.reset_form();
