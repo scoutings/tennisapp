@@ -9,6 +9,7 @@ let init = (app) => {
 
     // This is the Vue data.
     app.data = {
+        is_editting: false,
         coach_info: null
     };
 
@@ -19,16 +20,27 @@ let init = (app) => {
             });
     }
 
+    app.edit_coach = function () {
+        app.vue.is_editting = true;
+    }
+
+    app.done_edit_coach = function () {
+        app.vue.is_editting = false;
+        app.get_coach_info();
+    }
+
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
+        edit: app.edit_coach,
+        done_edit: app.done_edit_coach
     };
 
     // This creates the Vue instance.
     app.vue = new Vue({
         el: '#vue-target',
         data: app.data,
-        //methods: app.methods
+        methods: app.methods
     });
 
     // And this initializes it.
