@@ -14,36 +14,55 @@
       <div class="section">
         <h1 class="title">Edit Coaching Profile</h1>
         <div class="field">
+          <label class="label">Phone Number</label>
           <div class="control">
             <input type="text" v-model="coach_info['phone_num_coach']" class="input">
           </div>
         </div>
         <div class="field">
+          <label class="label">State</label>
           <div class="control">
             <input type="text" v-model="coach_info['state_coach']" class="input">
           </div>
         </div>
         <div class="field">
+          <label class="label">City</label>
           <div class="control">
             <input type="text" v-model="coach_info['city_coach']" class="input">
           </div>
         </div>
         <div class="field">
+          <label class="label">About</label>
           <div class="control">
             <textarea class = "textarea" v-model="coach_info['about_coach']"></textarea>
           </div>
         </div>
         <div class="field">
+          <label class="label">Years of Experience</label>
           <div class="control">
             <input type="text" v-model="coach_info['experience_coach']" class="input">
           </div>
         </div>
         <div class="field">
+          <label class="label">Private Lesson Rate</label>
           <div class="control">
             <input type="text" v-model="coach_info['private_rate_coach']" class="input">
           </div>
         </div>
         <div class="field">
+          <label class="label">Semi Private Lesson Rate</label>
+          <div class="control">
+            <input type="text" v-model="coach_info['semi_private_rate_coach']" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Group Lesson Rate</label>
+          <div class="control">
+            <input type="text" v-model="coach_info['group_rate_coach']" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Hitting Rate</label>
           <div class="control">
             <input type="text" v-model="coach_info['hitting_rate_coach']" class="input">
           </div>
@@ -62,38 +81,57 @@
       <div class="section">
         <h1 class="title">Coaching Profile</h1>
         <div class="field">
+          <label class="label">Phone Number</label>
           <div class="control">
             <input type="text" v-model="coach_info['phone_num_coach']" class="input" readonly>
           </div>
         </div>
         <div class="field">
+          <label class="label">State</label>
           <div class="control">
             <input type="text" v-model="coach_info['state_coach']" class="input" readonly>
           </div>
         </div>
         <div class="field">
+          <label class="label">City</label>
           <div class="control">
             <input type="text" v-model="coach_info['city_coach']" class="input" readonly>
           </div>
         </div>
         <div class="field">
+          <label class="label">About</label>
           <div class="control">
-            <textarea class = "textarea" v-model="coach_info['about_coach']"></textarea>
+            <textarea class = "textarea" v-model="coach_info['about_coach']" readonly></textarea>
           </div>
         </div>
         <div class="field">
+          <label class="label">Years of Experience</label>
           <div class="control">
             <input type="text" v-model="coach_info['experience_coach']" class="input" readonly>
           </div>
         </div>
         <div class="field">
+          <label class="label">Private Lesson Rate</label>
           <div class="control">
             <input type="text" v-model="coach_info['private_rate_coach']" class="input" readonly>
           </div>
         </div>
         <div class="field">
+          <label class="label">Semi Private Lesson Rate</label>
           <div class="control">
-            <input type="text" v-model="coach_info['hitting_rate_coach']" class="input">
+            <input type="text" v-model="coach_info['semi_private_rate_coach']" class="input" readonly>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Group Lesson Rate</label>
+          <div class="control">
+            <input type="text" v-model="coach_info['group_rate_coach']" class="input" readonly>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Hitting Rate</label>
+          <div class="control">
+            <input type="text" v-model="coach_info['hitting_rate_coach']" class="input" readonly>
           </div>
         </div>
         <div class="field"> 
