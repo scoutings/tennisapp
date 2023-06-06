@@ -20,8 +20,24 @@ let init = (app) => {
             });
     }
 
-    app.edit_coach = function () {
+    app.set_edit_coach = function () {
         app.vue.is_editting = true;
+    }
+
+    app.edit_coach = function () {
+        axios.post(edit_coach_url, {
+            phone_number: app.vue.coach_info['phone_num_coach'],
+            state: app.vue.coach_info['state_coach'],
+            city: app.vue.coach_info['city_coach'],
+            about: app.vue.coach_info['about_coach'],
+            experience: app.vue.coach_info['experience_coach'],
+            private_rate: app.vue.coach_info['private_rate_coach'],
+            hitting_rate: app.vue.coach_info['hitting_rate_coach']
+        }).then(function (response) {
+            app.vue.is_editting = false;
+        }).catch(function (error) {
+            console.log(error);
+        })
     }
 
     app.done_edit_coach = function () {
@@ -32,8 +48,9 @@ let init = (app) => {
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
-        edit: app.edit_coach,
-        done_edit: app.done_edit_coach
+        set_edit: app.set_edit_coach,
+        done_edit: app.done_edit_coach,
+        edit: app.edit_coach
     };
 
     // This creates the Vue instance.
