@@ -18,11 +18,11 @@ let init = (app) => {
             .then(function (response) {
                 app.vue.coach_info = response.data.coach;
             });
-    }
+    };
 
     app.set_edit_coach = function () {
         app.vue.is_editting = true;
-    }
+    };
 
     app.edit_coach = function () {
         axios.post(edit_coach_url, {
@@ -40,19 +40,24 @@ let init = (app) => {
         }).catch(function (error) {
             console.log(error);
         })
-    }
+    };
 
     app.done_edit_coach = function () {
         app.vue.is_editting = false;
         app.get_coach_info();
-    }
+    };
+
+    app.del_coach = function () {
+        axios.post(del_coach_url);
+    };
 
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
         set_edit: app.set_edit_coach,
         done_edit: app.done_edit_coach,
-        edit: app.edit_coach
+        edit: app.edit_coach,
+        del: app.del_coach
     };
 
     // This creates the Vue instance.

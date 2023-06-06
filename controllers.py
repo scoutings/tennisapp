@@ -112,7 +112,7 @@ def edit_coach():
     return "ok"
 
 @action('del_coach', method="POST")
-@action.uses(url_signer.verify(), db, auth.user)
+@action.uses(url_signer.verify(), db, session, auth.user)
 def del_coach():
     db(db.coaches.user_id == auth.current_user.get('id')).delete()
     return "ok"
