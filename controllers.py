@@ -21,7 +21,7 @@ The path follows the bottlepy syntax.
 @action.uses(auth.user)       indicates that the action requires a logged in user
 @action.uses(auth)            indicates that the action requires the auth object
 
-session, db, T, auth, and tempates are examples of Fixtures.
+session, db, T, auth, and tempates are examples of Fixtures
 Warning: Fixtures MUST be declared with @action.uses({fixtures}) else your app will result in undefined behavior
 """
 
@@ -58,7 +58,9 @@ def coaching_find():
 @action('coaching_profile')
 @action.uses('coaching_profile.html', db, auth.user, url_signer)
 def coaching_profile():
-    return dict()
+    return dict(
+                get_coach_info_url=URL('get_coach_info', signer=url_signer)
+            )
 
 # ============= API =============
 
@@ -71,7 +73,6 @@ def get_iscoach():
     return dict(
                 is_coach=is_coach
             )
-
 
 @action('add_coach', method="POST")
 @action.uses(url_signer.verify(), db, auth.user)
@@ -88,6 +89,14 @@ def add_coach():
     )
     return dict(
                 id=id
+            )
+
+@action('get_coach_info')
+@action.uses(url_signer.verify(), db, auth.user)
+def get_coach_info():
+    coach = db(db.coaches.user_id == auth.current_user.get('id')).select().first()
+    return dict(
+                coach=coach
             )
 
 @action('get_coaches')

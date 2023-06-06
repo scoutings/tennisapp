@@ -6,22 +6,18 @@ let app = {};
 // Given an empty app object, initializes it filling its attributes,
 // creates a Vue instance, and then initializes the Vue instance.
 let init = (app) => {
-    
 
-    
     // This is the Vue data.
     app.data = {
+        coach_info: null
     };
-/*
-    app.enumerate = (a) => {
-        // This adds an _idx field to each element of the array.
-        let k = 0;
-        a.map((e) => {e._idx = k++;});
-        return a;
-    };
-    */
-    
 
+    app.get_coach_info = function () {
+        axios.get(get_coach_info_url)
+            .then(function (response) {
+                app.vue.coach_info = response.data.coach;
+            });
+    }
 
     // This contains all the methods.
     app.methods = {
@@ -39,6 +35,7 @@ let init = (app) => {
     app.init = () => {
         // Put here any initialization code.
         // Typically this is a server GET call to load the data.
+        app.get_coach_info();
     };
 
     // Call to the initializer.
