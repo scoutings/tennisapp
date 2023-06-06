@@ -59,7 +59,8 @@ def coaching_find():
 @action.uses('coaching_profile.html', db, auth.user, url_signer)
 def coaching_profile():
     return dict(
-                get_coach_info_url=URL('get_coach_info', signer=url_signer)
+                get_coach_info_url=URL('get_coach_info', signer=url_signer),
+                edit_coach_url=URL('edit_coach', signer=url_signer)
             )
 
 # ============= API =============
@@ -92,6 +93,21 @@ def add_coach():
     return dict(
                 id=id
             )
+
+@action('edit_coach', method="POST")
+@action.uses(url_signer.verify(), db, auth.user)
+def edit_coach():
+    # Todod fix proivate rate and hittign rate it is setting to null
+    db(db.coaches.user_id == auth.current_user.get('id')).update(
+                phone_num_coach=request.json.get('phone_number'),
+                state_coach=request.json.get('state'),
+                city_coach=request.json.get('city'),
+                about_coach=request.json.get('about'),
+                experience_coach=request.json.get('experience'),
+                private_rate_coach=request.json.get('private_rate'),
+                hitting_rate_coach=request.json.get('hitting_rate')
+            )
+    return "ok"
 
 @action('get_coach_info')
 @action.uses(url_signer.verify(), db, auth.user)
