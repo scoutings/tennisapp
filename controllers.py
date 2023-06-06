@@ -98,13 +98,12 @@ def get_coaches():
             'coaches': [*In here will be all the columns in the coaches table*]
             'auth_user': [*In here will be all the columns in the auth_user table*]
     '''
-    # Todo get the params for the query this will inckude the state and the City
     state_q = request.params.get('state_q')
     city_q = request.params.get('city_q')
     all_coaches = db(db.coaches.user_id == db.auth_user.id).select().as_list()
     coaches = []
     for c in all_coaches:
-        if state_q in c['coaches']['state_coach'] and city_q in c['coaches']['city_coach']:
+        if state_q.lower() in c['coaches']['state_coach'].lower() and city_q.lower() in c['coaches']['city_coach'].lower():
             coaches.append(c)
     return dict(
                 coaches=coaches
