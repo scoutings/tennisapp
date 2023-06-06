@@ -60,11 +60,11 @@ def coaching_find():
 def coaching_profile():
     return dict(
                 get_coach_info_url=URL('get_coach_info', signer=url_signer),
-                edit_coach_url=URL('edit_coach', signer=url_signer)
+                edit_coach_url=URL('edit_coach', signer=url_signer),
+                del_coach_url=URL('del_coach', signer=url_signer)
             )
 
 # ============= API =============
-
 
 @action('get_iscoach')
 @action.uses(url_signer.verify(), db, auth.user)
@@ -105,8 +105,16 @@ def edit_coach():
                 about_coach=request.json.get('about'),
                 experience_coach=request.json.get('experience'),
                 private_rate_coach=request.json.get('private_rate'),
-                hitting_rate_coach=request.json.get('hitting_rate')
+                hitting_rate_coach=request.json.get('hitting_rate'),
+                semi_private_rate_coach=request.json.get('semi_private_rate'),
+                group_rate_coach=request.json.get('group_rate')
             )
+    return "ok"
+
+@action('del_coach', method="POST")
+@action.uses(url_signer.verify(), db, auth.user)
+def del_coach():
+    db(db.coaches.user_id == auth.current_user.get('id')).delete()
     return "ok"
 
 @action('get_coach_info')

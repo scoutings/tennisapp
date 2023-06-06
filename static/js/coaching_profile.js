@@ -32,6 +32,8 @@ let init = (app) => {
             about: app.vue.coach_info['about_coach'],
             experience: app.vue.coach_info['experience_coach'],
             private_rate: app.vue.coach_info['private_rate_coach'],
+            semi_private_rate: app.vue.coach_info['semi_private_rate_coach'],
+            group_rate: app.vue.coach_info['group_rate_coach'],
             hitting_rate: app.vue.coach_info['hitting_rate_coach']
         }).then(function (response) {
             app.vue.is_editting = false;
