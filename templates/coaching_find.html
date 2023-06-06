@@ -5,7 +5,6 @@
      display: none;
 }
 
-
 .searchbar{
     display: flex;
     justify-content: center;
@@ -30,13 +29,24 @@ h1{
 
 .coaches{
     position: absolute;
-    margin-left: 70px;
-    margin-top: 180px;
+    margin-left: 180px;
+    margin-top: 100px;
     border: blue;
+
 }
 
-</style>
+.no_coaches{
+    position: relative;
+    margin-left: 550px;
+    margin-top: 150px;
+}
 
+
+
+.box{
+    margin-top: 30px;
+}
+</style>
 
 <div class="section" id="vue-target" v-cloak>
     <h1>Find Your Coach</h1>
@@ -53,25 +63,56 @@ h1{
             </div>
         </div>
     </div>
-    <div v-if="coaches.length == 0">
-        No Coaches Found
+    <div v-if="coaches.length == 0" class = "no_coaches">
+        No Coaches In This City
     </div>
-    <div v-else class = "coaches">
+    <div v-else class="coaches">
         <div v-for="c in coaches">
-            <table class = "table is-fullwidth">
-                <thead>
+            <div class = "box">
+                <table class="table is-fullwidth">
                     <tr>
                         <th>Coach {{c.auth_user.first_name}}</th>
-                        <td>About: {{c.coaches.about_coach}}</td>
-                        <td>Coaching Experience: {{c.coaches.experience_coach}} years</td> 
-                        <td>Private Rate: ${{c.coaches.private_rate_coach}}/hr</td>     
-                        <td>Hitting Rate: ${{c.coaches.hitting_rate_coach}}/hr</td> 
-                        <td><button class = "button is-info">Contact</button></td>
+                        <td>
+                            <button class="button is-success is-info" @mouseover="showAbout = true" @mouseout="showAbout = false">
+                                Bio
+                            </button>
+                        </td>
+                        <td>Coaching Experience: {{c.coaches.experience_coach}} years</td>
+                        <td>Private Rate: ${{c.coaches.private_rate_coach}}/hr</td>
+                        <td>Hitting Rate: ${{c.coaches.hitting_rate_coach}}/hr</td>
+                        <td><button class="button is-info">Contact</button></td>
                     </tr>
-                </thead>
-            </table>            
+                    <tr v-if="showAbout">
+                        <td colspan="6" class="about-section">About: {{c.coaches.about_coach}}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 </div>
 
 

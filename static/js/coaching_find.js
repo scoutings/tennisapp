@@ -11,7 +11,8 @@ let init = (app) => {
     app.data = {
         state_q: "",
         city_q: "",
-	coaches: []
+        showAbout: false,
+	    coaches: [],
     };
 
     app.enumerate = (a) => {
