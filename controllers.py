@@ -64,6 +64,15 @@ def coaching_profile():
                 del_coach_url=URL('del_coach', signer=url_signer)
             )
 
+@action('stringing_apply')
+@action.uses('stringing_apply.html', db, auth.user, url_signer)
+def stringing_apply():
+    ret_val = dict(
+                get_isstringer_url=URL('get_isstringer', signer=url_signer),
+                add_stringer_url=URL('add_stringer', signer=url_signer)
+            )
+    return ret_val
+
 # ============= API =============
 
 @action('get_iscoach')
@@ -142,4 +151,30 @@ def get_coaches():
             coaches.append(c)
     return dict(
                 coaches=coaches
+            )
+
+@action('get_isstringer')
+@action.uses(url_signer.verify(), db, auth.user)
+def get_isstringer():
+    # If there exists a coach with this user id
+    is_stringer = db(db.stringers.user_id == auth.current_user.get('id')).count() == 1
+    return dict(
+                is_stringer=is_stringer
+            )
+
+@action('add_stringer', method="POST")
+@action.uses(url_signer.verify(), db, auth.user)
+def add_stringer():
+    id = db.stringers.insert(
+        user_id=auth.current_user.get('id'),
+        phone_num_coach=request.json.get('phone_number'),
+        state_coach=request.json.get('state'),
+        city_coach=request.json.get('city'),
+        about_coach=request.json.get('about'),
+        experience_coach=request.json.get('experience'),
+        price_stringer=request.json.get('price'),
+        turnover_stringer=request.json.get('turnover')
+    )
+    return dict(
+                id=id
             )

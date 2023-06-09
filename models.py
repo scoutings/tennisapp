@@ -33,4 +33,15 @@ db.define_table('coaches',
                 Field('group_rate_coach', 'integer')
                 )
 
+db.define_table('stringers',
+                Field('user_id', 'reference auth_user', default=lambda: auth.current_user.get('id')),
+                Field('phone_num_stringer'),
+                Field('state_stringer'),
+                Field('city_stringer'),
+                Field('about_stringer'),
+                Field('experience_stringer', 'integer'),
+                Field('price_stringer', 'integer'),
+                Field('turnover_stringer', 'integer')
+                )
+
 db.commit()

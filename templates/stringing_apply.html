@@ -1,0 +1,151 @@
+[[extend 'layout.html']]
+
+<style>
+[v-cloak] {
+     display: none;
+}
+
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.container, .section {
+  margin: 0;
+  padding: 0;
+} 
+
+.photo{
+  background-image: url('https://cdn2.wanderlust.co.uk/media/1063/img_141216_15030409_w19cs.jpg?anchor=center&mode=crop&width=1200&height=0&rnd=132049994090000000');
+  background-repeat: no-repeat;
+  background-size: cover;
+  /*background-position: 25% 155%; //to lower picture height */
+  height: 900px;
+  margin-top: -100px;
+  }
+
+
+.alert {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 600px;
+  justify-content: center;
+  }
+
+  .formstyle {
+  margin-top: 80px;
+  margin-left: 80px;
+}
+
+input[type="text"] {
+    width: 900px;
+}
+
+.big-input {
+  height: 170px; /* Adjust the desired height */
+  resize: vertical; /* Allows vertical resizing */
+}
+
+/* Replace .input with the appropriate class or selector for your input field */
+.input::placeholder {
+  color: grey /* Replace "red" with your desired color */
+}
+
+
+.textarea{
+  width: 100px; /* Adjust the desired width */
+  height: 170px; /* Adjust the desired height */
+  resize: vertical; /* Allows vertical resizing */
+
+
+}
+
+.textarea::placeholder {
+  color: grey;
+}
+
+
+
+</style>
+
+<div class="section" id="vue-target" v-cloak>
+  <div v-if="!is_stringer" class="formstyle">
+    <div class="container block">
+      <div class="section">
+        <h1 class="title">Apply To String</h1>
+        <div class="field">
+          <div class="control">
+            <input type="text" placeholder = "Phone Number" v-model="add_phone_number" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input type="text" placeholder = "State" v-model="add_state" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input type="text" placeholder = "City" v-model="add_city" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <textarea class = "textarea" placeholder="About You (Stringing, Playing Experience)" v-model="add_about"></textarea>
+            <!--<input type="text" placeholder = "About You (Coaching, Playing Experience)" v-model="add_about" class="input big-input"> -->
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input type="text" placeholder = "Stringing Years Experience" v-model="add_experience" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input type="text" placeholder = "Price Per Racket" v-model="add_price" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input type="text" placeholder = "Racket Turnover in Hours" v-model="add_turnover" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input type="submit" @click="add_stringer" value="Submit" class="button is-success">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div v-else>
+    <div class = "mt-7 photo">
+      <div class = "alert">
+        <div class = "columns">
+          <div class = "column">
+            <div class = "box has-text-centered has-background-info-light">
+              <h1 class="title">You Have Successfully Become A Stringer!</h1>
+              <h2 class = "subtitle mt-4" style = "text-align: center;">Thank You For Applying</h2>
+            <a href="[[=URL('stringer_profile')]]" class="button is-info has-background-link-dark">View Profile</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+[[block page_scripts]]
+<!-- Loads the index-specific js for Vue -->
+<script>
+  let get_isstringer_url = "[[=XML(get_isstringer_url)]]";
+  let add_stringer_url = "[[=XML(add_stringer_url)]]";
+</script>
+<script src="../static/js/stringing_apply.js"></script>
+[[end]]
