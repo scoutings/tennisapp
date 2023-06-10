@@ -82,6 +82,13 @@ def stringing_profile():
                 del_stringer_url=URL('del_stringer', signer=url_signer)
             )
 
+@action('stringing_find')
+@action.uses('stringing_find.html', db, auth, url_signer)
+def stringing_find():
+    return dict(
+                get_stringers_url=URL('get_stringers', signer=url_signer)
+            )
+
 # ============= API =============
 
 @action('get_iscoach')
@@ -215,4 +222,23 @@ def get_stringer_info():
     stringer = db(db.stringers.user_id == auth.current_user.get('id')).select().first()
     return dict(
                 stringer=stringer
+            )
+
+@action('get_stringers')
+@action.uses(url_signer.verify(), db, auth)
+def get_stringers():
+    '''
+        This returns a list of all the stringers. Each coach will be a dictionary of two keys:
+            'stringers': [*In here will be all the columns in the stringers table*]
+            'auth_user': [*In here will be all the columns in the auth_user table*]
+    '''
+    state_q = request.params.get('state_q')
+    city_q = request.params.get('city_q')
+    all_stringers = db(db.stringers.user_id == db.auth_user.id).select().as_list()
+    stringers = []
+    for s in all_stringers:
+        if state_q.lower() in s['stringers']['state_stringer'].lower() and city_q.lower() in s['stringers']['city_stringer'].lower():
+            stringers.append(s)
+    return dict(
+                stringers=stringers
             )

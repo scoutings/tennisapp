@@ -1,0 +1,105 @@
+[[extend 'layout.html']]
+
+<style>
+[v-cloak] {
+     display: none;
+}
+
+.searchbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh; 
+    position: absolute;
+    left: 35px;
+}
+
+h1{
+    text-align: center;
+    position: absolute;
+    left: 600px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.stringing_style{
+    position:absolute; 
+    top: 100px;
+    right: 80px;
+}
+
+.stringers{
+    position: absolute;
+    margin-left: 80px;
+    margin-top: 100px;
+    border: blue;
+
+}
+
+.no_stringers{
+    position: relative;
+    margin-left: 550px;
+    margin-top: 150px;
+}
+
+.box{
+    margin-top: 30px;
+}
+</style>
+
+<div class="section" id="vue-target" v-cloak>
+    <h1>Find Your Stringer</h1>
+    <div class="searchbar">
+        <div class="columns">
+            <div class="column is-11 is-offset-1">
+                <input class="input is-rounded" type="text" placeholder="Search State" v-model="state_q">
+            </div>
+            <div class="column is-11 is-offset-1">
+                <input class="input is-rounded" type="text" placeholder="Search City" v-model="city_q">
+            </div>
+            <div class="column is-11 is-offset-1">
+                <button class="button is-rounded is-primary" @click="get_stringers">Find</button>
+            </div>
+        </div>
+    </div>
+    <div v-if="stringers.length === 0" class="no_stringers">
+        No Stringers In This City
+    </div>
+    <div v-else class="stringers">
+        <div v-for="s in stringers">
+            <div class="box">
+                <table class="table is-fullwidth">
+                    <tr>
+                        <th>Stringer {{s.auth_user.first_name}}</th>
+                        <td>
+                            <button class="button is-success is-info"
+                                    @mouseover="toggleAbout(s, true)"
+                                    @mouseout="toggleAbout(s, false)">
+                                Bio
+                            </button>
+                        </td>
+                        <td>Stringing Experience: {{s.stringers.experience_stringer}} years</td>
+                        <td>Price: ${{s.stringers.price_stringer}}/racket</td>
+                        <td>Turnover: ${{s.stringers.turnover_stringer}}hr(s)</td>
+                        <td><button class="button is-info">Contact</button></td>
+                    </tr>
+                    <tr v-if="s.showAbout">
+                        <td colspan="6" class="about-section">{{s.stringers.about_stringer}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</div>
+
+
+
+
+[[block page_scripts]]
+<!-- Loads the index-specific js for Vue -->
+<script>
+    let get_stringers_url = "[[=XML(get_stringers_url)]]"; 
+</script>
+<script src="../static/js/stringing_find.js"></script>
+[[end]]
