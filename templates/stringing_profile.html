@@ -1,0 +1,133 @@
+[[extend 'layout.html']]
+
+<style>
+
+[v-cloak] {
+     display: none;
+}
+
+</style>
+
+<div class="section" id="vue-target" v-cloak>
+  <div v-if="is_editting">
+    <div class="container block">
+      <div class="section">
+        <h1 class="title">Edit Stringing Profile</h1>
+        <div class="field">
+          <label class="label">Phone Number</label>
+          <div class="control">
+            <input type="text" v-model="stringer_info['phone_num_stringer']" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">State</label>
+          <div class="control">
+            <input type="text" v-model="stringer_info['state_stringer']" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">City</label>
+          <div class="control">
+            <input type="text" v-model="stringer_info['city_stringer']" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">About</label>
+          <div class="control">
+            <textarea class = "textarea" v-model="stringer_info['about_stringer']"></textarea>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Years of Experience</label>
+          <div class="control">
+            <input type="text" v-model="stringer_info['experience_stringer']" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Price</label>
+          <div class="control">
+            <input type="text" v-model="stringer_info['price_stringer']" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Turnover</label>
+          <div class="control">
+            <input type="text" v-model="stringer_info['turnover_stringer']" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input type="submit" @click="edit" value="Apply Changes" class="button is-success">
+            <input type="submit" @click="done_edit" value="Back" class="button is-primary">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div v-else>
+    <div class="container block">
+      <div class="section">
+        <h1 class="title">Stringing Profile</h1>
+        <div class="field">
+          <label class="label">Phone Number</label>
+          <div class="control">
+            <div class="box">{{stringer_info.phone_num_stringer}}</div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">State</label>
+          <div class="control">
+            <div class="box">{{stringer_info.state_stringer}}</div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">City</label>
+          <div class="control">
+            <div class="box">{{stringer_info.city_stringer}}</div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">About</label>
+          <div class="control">
+            <div class="box">{{stringer_info.about_stringer}}</div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Years of Experience</label>
+          <div class="control">
+            <div class="box">{{stringer_info.experience_stringer}}</div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Price</label>
+          <div class="control">
+            <div class="box">{{stringer_info.price_stringer}}</div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Turnover</label>
+          <div class="control">
+            <div class="box">{{stringer_info.turnover_stringer}}</div>
+          </div>
+        </div>
+        <div class="field"> 
+          <div class="control">
+            <div class="button is-warning" @click="set_edit">Edit</div>
+            <div class="button is-danger" @click="del">Delete Profile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+[[block page_scripts]]
+<!-- Loads the index-specific js for Vue -->
+<script>
+  let get_stringer_info_url = "[[=XML(get_stringer_info_url)]]";
+  let edit_stringer_url = "[[=XML(edit_stringer_url)]]";
+  let del_stringer_url = "[[=XML(del_stringer_url)]]";
+</script>
+<script src="../static/js/stringing_profile.js"></script>
+[[end]]
+

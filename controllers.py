@@ -48,13 +48,6 @@ def coaching_apply():
             )
     return ret_val
 
-@action('coaching_find')
-@action.uses('coaching_find.html', db, auth, url_signer)
-def coaching_find():
-    return dict(
-                get_coaches_url=URL('get_coaches', signer=url_signer)
-            )
-
 @action('coaching_profile')
 @action.uses('coaching_profile.html', db, auth.user, url_signer)
 def coaching_profile():
@@ -62,6 +55,13 @@ def coaching_profile():
                 get_coach_info_url=URL('get_coach_info', signer=url_signer),
                 edit_coach_url=URL('edit_coach', signer=url_signer),
                 del_coach_url=URL('del_coach', signer=url_signer)
+            )
+
+@action('coaching_find')
+@action.uses('coaching_find.html', db, auth, url_signer)
+def coaching_find():
+    return dict(
+                get_coaches_url=URL('get_coaches', signer=url_signer)
             )
 
 @action('stringing_apply')
@@ -72,6 +72,15 @@ def stringing_apply():
                 add_stringer_url=URL('add_stringer', signer=url_signer)
             )
     return ret_val
+
+@action('stringing_profile')
+@action.uses('stringing_profile.html', db, auth.user, url_signer)
+def stringing_profile():
+    return dict(
+                get_stringer_info_url=URL('get_stringer_info', signer=url_signer),
+                edit_stringer_url=URL('edit_stringer', signer=url_signer),
+                del_stringer_url=URL('del_stringer', signer=url_signer)
+            )
 
 # ============= API =============
 
@@ -167,14 +176,43 @@ def get_isstringer():
 def add_stringer():
     id = db.stringers.insert(
         user_id=auth.current_user.get('id'),
-        phone_num_coach=request.json.get('phone_number'),
-        state_coach=request.json.get('state'),
-        city_coach=request.json.get('city'),
-        about_coach=request.json.get('about'),
-        experience_coach=request.json.get('experience'),
+        phone_num_stringer=request.json.get('phone_number'),
+        state_stringer=request.json.get('state'),
+        city_stringer=request.json.get('city'),
+        about_stringer=request.json.get('about'),
+        experience_stringer=request.json.get('experience'),
         price_stringer=request.json.get('price'),
         turnover_stringer=request.json.get('turnover')
     )
     return dict(
                 id=id
+            )
+
+@action('edit_stringer', method="POST")
+@action.uses(url_signer.verify(), db, auth.user)
+def edit_stringer():
+    # Todod fix proivate rate and hittign rate it is setting to null
+    db(db.stringers.user_id == auth.current_user.get('id')).update(
+                phone_num_stringer=request.json.get('phone_number'),
+                state_stringer=request.json.get('state'),
+                city_stringer=request.json.get('city'),
+                about_stringer=request.json.get('about'),
+                experience_stringer=request.json.get('experience'),
+                price_stringer=request.json.get('price'),
+                turnover_stringer=request.json.get('turnover')
+            )
+    return "ok"
+
+@action('del_stringer', method="POST")
+@action.uses(url_signer.verify(), db, session, auth.user)
+def del_stringer():
+    db(db.stringers.user_id == auth.current_user.get('id')).delete()
+    return "ok"
+
+@action('get_stringer_info')
+@action.uses(url_signer.verify(), db, auth.user)
+def get_stringer_info():
+    stringer = db(db.stringers.user_id == auth.current_user.get('id')).select().first()
+    return dict(
+                stringer=stringer
             )
