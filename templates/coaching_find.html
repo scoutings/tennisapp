@@ -108,7 +108,7 @@ h1{
                                 Bio
                             </button>
                         </td>
-                        <td><button class="button is-info">Contact</button></td>
+                        <td><button class="button is-info" @click="send(c._idx)">Contact</button></td>
                     </tr>
                     <tr v-if="c.showAbout">
                         <td colspan="12" class="about-section">{{c.coaches.about_coach}}</td>
@@ -127,7 +127,8 @@ h1{
 [[block page_scripts]]
 <!-- Loads the index-specific js for Vue -->
 <script>
-    let get_coaches_url = "[[=XML(get_coaches_url)]]"; 
+    let get_coaches_url = "[[=XML(get_coaches_url)]]";
+    let send_message_url = "[[=XML(send_message_url)]]";
 </script>
 <script src="../static/js/coaching_find.js"></script>
 [[end]]

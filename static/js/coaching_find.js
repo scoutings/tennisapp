@@ -27,9 +27,17 @@ let init = (app) => {
         coach.showAbout = !coach.showAbout; // Toggle the showAbout property
     };
 
+    app.send_message = function (row_id) {
+        axios.post(send_message_url, {
+            to: app.vue.coaches[row_id]['auth_user']['id'],
+            message: "I am interested in coaching!"
+        });
+    };
+
     app.methods = {
         get_coaches: app.get_coaches,
-        toggleAbout: app.toggleAbout
+        toggleAbout: app.toggleAbout,
+        send: app.send_message
     };
 
     app.vue = new Vue({

@@ -61,7 +61,8 @@ def coaching_profile():
 @action.uses('coaching_find.html', db, auth, url_signer)
 def coaching_find():
     return dict(
-                get_coaches_url=URL('get_coaches', signer=url_signer)
+                get_coaches_url=URL('get_coaches', signer=url_signer),
+                send_message_url=URL('send_message', signer=url_signer)
             )
 
 @action('stringing_apply')
@@ -270,11 +271,33 @@ def send_message():
 @action.uses(url_signer.verify(), db, auth.user)
 def get_messages():
     c_user = auth.current_user.get('id')
-    messaging = request.params.get('messaging')
-    all_messages = db(db.auth_user.id == messages and (
-        (db.messages.sender == c_user and db.messages.to == messaging) or
-        (db.messages.sender == messaging and db.messages.to == c_user))).select().as_list()
-    all_messages = sorted(all_messages, key=lambda x: x['messages']['time_sent'], reverse=True)
+    all_messages = db(db.messages.sender == c_user or
+                      db.messages.to == c_user).select().as_list()
+    messages_list = []
+    for m in all_messages:
+        if m['sender'] == c_user:
+            if m['to'] not in messages_list:
+                messages_list.append(m['to'])
+        else:
+            if m['sender'] not in messages_list:
+                messages_list.append(m['sender'])
+    messages = []
+    for m in messages_list:
+        add_val = {}
+        add_val['uid'] = m
+        add_val['fname'], add_val['lname'] = get_first_last(m)
+        c_messages = db((db.messages.sender == c_user and db.messages.to == m) or
+                        (db.messages.sender == m and db.messages.to == c_user)).select().as_list()
+        c_messages = sorted(c_messages, key=lambda x: x['time_sent'], reverse=True)
+        add_val['messages'] = c_messages
+        messages.append(add_val)
+    messages = sorted(messages, key=lambda x: x['messages'][0]['time_sent'], reverse=True)
     return dict(
                 messages=all_messages
             )
+
+# ============= Helpers =============
+
+def get_first_last(user_id):
+    select = db(db.auth_user.id == user_id).select().first()
+    return (select['first_name'], select['last_name'])
