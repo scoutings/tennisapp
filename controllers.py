@@ -93,7 +93,8 @@ def stringing_find():
 @action.uses('messages.html', db, auth.user, url_signer)
 def messages():
     return dict(
-                
+                send_message_url=URL('send_message', signer=url_signer),
+                get_messages_url=URL('get_messages', signer=url_signer)
             )
 
 # ============= API =============
