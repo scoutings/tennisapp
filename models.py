@@ -44,4 +44,11 @@ db.define_table('stringers',
                 Field('turnover_stringer', 'integer')
                 )
 
+db.define_table('messages',
+                Field('sender', 'reference auth_user', default=lambda:auth.current_user.get('id')),
+                Field('to', 'reference auth_user'),
+                Field('message'),
+                Field('time_sent', default=datetime.datetime.today().isoformat())
+                )
+
 db.commit()

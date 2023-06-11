@@ -89,6 +89,13 @@ def stringing_find():
                 get_stringers_url=URL('get_stringers', signer=url_signer)
             )
 
+@action('messages')
+@action.uses('messages.html', db, auth.user, url_signer)
+def messages():
+    return dict(
+                
+            )
+
 # ============= API =============
 
 @action('get_iscoach')
@@ -241,4 +248,32 @@ def get_stringers():
             stringers.append(s)
     return dict(
                 stringers=stringers
+            )
+
+@action('send_message', method="POST")
+@action.uses(url_signer.verify(), db, auth.user)
+def send_message():
+    sender = auth.current_user.get('id')
+    to = request.json.get('to')
+    message = request.json.get('message')
+    id = db.messages.insert(
+               sender=sender,
+               to=to,
+               message=message
+            )
+    return dict(
+                id=id
+            )
+
+@action('get_messages')
+@action.uses(url_signer.verify(), db, auth.user)
+def get_messages():
+    c_user = auth.current_user.get('id')
+    messaging = request.params.get('messaging')
+    all_messages = db(db.auth_user.id == messages and (
+        (db.messages.sender == c_user and db.messages.to == messaging) or
+        (db.messages.sender == messaging and db.messages.to == c_user))).select().as_list()
+    all_messages = sorted(all_messages, key=lambda x: x['messages']['time_sent'], reverse=True)
+    return dict(
+                messages=all_messages
             )
