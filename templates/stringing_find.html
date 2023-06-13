@@ -5,6 +5,22 @@
      display: none;
 }
 
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    background-image: url('https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+
 .searchbar{
     display: flex;
     justify-content: center;
@@ -12,7 +28,9 @@
     height: 20vh; 
     position: absolute;
     left: 35px;
+    
 }
+
 
 
 h1{
@@ -50,11 +68,15 @@ h1{
 
 .box{
     margin-top: 30px;
+    width: 1300px;
+    position: absolute;
+    left: -120px;
 }
 </style>
 
 <div class="section" id="vue-target" v-cloak>
     <h1>Find Your Stringer</h1>
+    <div class = "photo">
     <div class="searchbar">
         <div class="columns">
             <div class="column is-11 is-offset-1">
@@ -96,7 +118,7 @@ h1{
             </div>
         </div>
     </div>
-    </div>
+</div>
 
 </div>
 
