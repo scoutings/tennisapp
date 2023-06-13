@@ -271,24 +271,40 @@ def send_message():
 @action.uses(url_signer.verify(), db, auth.user)
 def get_messages():
     c_user = auth.current_user.get('id')
-    all_messages = db(db.messages.sender == c_user or
-                      db.messages.to == c_user).select().as_list()
+    sent_messages = db(db.messages.sender == c_user).select().as_list()
+    received_messages = db(db.messages.to == c_user).select().as_list()
     messages_list = []
-    for m in all_messages:
-        if m['sender'] == c_user:
-            if m['to'] not in messages_list:
-                messages_list.append(m['to'])
-        else:
-            if m['sender'] not in messages_list:
-                messages_list.append(m['sender'])
+    for m in sent_messages:
+        if m['to'] not in messages_list:
+            messages_list.append(m['to'])
+    for m in received_messages:
+        if m['sender'] not in messages_list:
+            messages_list.append(m['sender'])
     messages = []
+    print(messages_list)
     for m in messages_list:
         add_val = {}
         add_val['uid'] = m
         add_val['fname'], add_val['lname'] = get_first_last(m)
-        c_messages = db((db.messages.sender == c_user and db.messages.to == m) or
-                        (db.messages.sender == m and db.messages.to == c_user)).select().as_list()
-        c_messages = sorted(c_messages, key=lambda x: x['time_sent'], reverse=True)
+        sent_messages = db(db.messages.sender == c_user and db.messages.to == m).select().as_list()
+        received_messages = db(db.messages.sender == m and db.messages.to == c_user).select().as_list()
+        sent_messages = sorted(sent_messages, key=lambda x: x['time_sent'])
+        received_messages= sorted(received_messages, key=lambda x: x['time_sent'])
+        c_messages = []
+        while len(sent_messages) != 0 or len(received_messages) != 0:
+            sent_peak, received_peak = None, None
+            if len(sent_messages):
+                sent_peak = sent_messages[0]['time_sent']
+            if len(received_messages):
+                received_peak = received_messages[0]['time_sent']
+            if sent_peak == None:
+                c_messages.append(received_messages.pop(0))
+            elif received_peak == None:
+                c_messages.append(sent_messages.pop(0))
+            elif sent_peak < received_peak:
+                c_messages.append(sent_messages.pop(0))
+            else:
+                c_messages.append(received_messages.pop(0))
         add_val['messages'] = c_messages
         messages.append(add_val)
     messages = sorted(messages, key=lambda x: x['messages'][0]['time_sent'], reverse=True)
