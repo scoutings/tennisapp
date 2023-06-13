@@ -24,6 +24,14 @@
         <div v-for="m in selected.messages">
           {{m}}
         </div>
+        <div class="field">
+          <textarea class="textarea" placeholder="Say Hi!" v-model="selected.draft"></textarea>
+        </div>
+        <div class="field">
+          <p class="control">
+            <button class="button is-link" @click="send">Send!</button>
+          </p>
+        </div>
       </div>
       <div v-else>
         <p>No user selected</p>

@@ -31,6 +31,7 @@ let init = (app) => {
             message: app.vue.selected.draft
         }).then(function () {
             app.get_messages();
+            app.vue.selected.draft = "";
         });
     };
 
