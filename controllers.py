@@ -293,7 +293,7 @@ def get_messages():
         messages.append(add_val)
     messages = sorted(messages, key=lambda x: x['messages'][0]['time_sent'], reverse=True)
     return dict(
-                messages=all_messages
+                messages=messages
             )
 
 # ============= Helpers =============

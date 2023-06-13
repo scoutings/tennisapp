@@ -23,7 +23,7 @@ let init = (app) => {
         axios.get(get_messages_url).then(function (response) {
             app.vue.messages = app.enumerate(response.data.messages);
         });
-    }
+    };
 
     app.send_message = function() {
         axios.post(send_message_url, {
@@ -32,11 +32,11 @@ let init = (app) => {
         }).then(function () {
             app.get_messages();
         });
-    }
+    };
 
     app.select = function (row_id) {
-        app.vue.selected = messages[row_id];
-    }
+        app.vue.selected = app.vue.messages[row_id];
+    };
 
     // This contains all the methods.
     app.methods = {
