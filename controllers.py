@@ -25,6 +25,8 @@ session, db, T, auth, and tempates are examples of Fixtures
 Warning: Fixtures MUST be declared with @action.uses({fixtures}) else your app will result in undefined behavior
 """
 
+import datetime
+
 from py4web import action, request, abort, redirect, URL, Field
 from yatl.helpers import A
 from .common import db, session, T, cache, auth, logger, authenticated, unauthenticated, flash
@@ -62,7 +64,8 @@ def coaching_profile():
 def coaching_find():
     return dict(
                 get_coaches_url=URL('get_coaches', signer=url_signer),
-                send_message_url=URL('send_message', signer=url_signer)
+                send_message_url=URL('send_message', signer=url_signer),
+                redirect_messages_url=URL('redirect_messages', signer=url_signer)
             )
 
 @action('stringing_apply')
@@ -261,10 +264,18 @@ def send_message():
     id = db.messages.insert(
                sender=sender,
                to=to,
-               message=message
+               message=message,
+               time_sent=datetime.datetime.today().isoformat()
             )
     return dict(
                 id=id
+            )
+
+@action('redirect_messages', method="GET")
+@action.uses(url_signer.verify(), db, auth.user)
+def redirect_messages():
+    return dict(
+                url=URL('messages')
             )
 
 @action('get_messages')

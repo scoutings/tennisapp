@@ -121,7 +121,7 @@ h1{
                                 Bio
                             </button>
                         </td>
-                        <td><button class="button is-info" @click="send(c._idx)">Contact</button></td>
+                        <td><a class="button is-info" @click="send(c._idx)">Contact</a></td>
                     </tr>
                     <tr v-if="c.showAbout">
                         <td colspan="12" class="about-section">{{c.coaches.about_coach}}</td>
@@ -142,6 +142,7 @@ h1{
 <script>
     let get_coaches_url = "[[=XML(get_coaches_url)]]";
     let send_message_url = "[[=XML(send_message_url)]]";
+    let redirect_messages_url = "[[=XML(redirect_messages_url)]]";
 </script>
 <script src="../static/js/coaching_find.js"></script>
 [[end]]
