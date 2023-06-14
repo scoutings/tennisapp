@@ -312,8 +312,8 @@ def get_messages():
         add_val['fname'], add_val['lname'] = get_first_last(m)
         sent_messages = db(db.messages.sender == c_user and db.messages.to == m).select().as_list()
         received_messages = db(db.messages.sender == m and db.messages.to == c_user).select().as_list()
-        sent_messages = sorted(sent_messages, key=lambda x: x['time_sent'])
-        received_messages= sorted(received_messages, key=lambda x: x['time_sent'])
+        sent_messages = sorted(sent_messages, key=lambda x: x['time_sent'], reverse=True)
+        received_messages= sorted(received_messages, key=lambda x: x['time_sent'], reverse=True)
         c_messages = []
         while len(sent_messages) != 0 or len(received_messages) != 0:
             sent_peak, received_peak = None, None
@@ -325,7 +325,7 @@ def get_messages():
                 c_messages.append(received_messages.pop(0))
             elif received_peak == None:
                 c_messages.append(sent_messages.pop(0))
-            elif sent_peak < received_peak:
+            elif sent_peak > received_peak:
                 c_messages.append(sent_messages.pop(0))
             else:
                 c_messages.append(received_messages.pop(0))
