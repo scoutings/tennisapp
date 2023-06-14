@@ -8,6 +8,7 @@ let init = (app) => {
     
     // This is the Vue data.
     app.data = {
+        sugar: Sugar,
         messages: [],
         selected: null
     };

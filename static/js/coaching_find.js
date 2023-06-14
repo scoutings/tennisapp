@@ -30,7 +30,7 @@ let init = (app) => {
     app.send_message = function (row_id) {
         axios.post(send_message_url, {
             to: app.vue.coaches[row_id]['auth_user']['id'],
-            message: "I am interested in coaching!"
+            message: "I am interested in tennis lessons"
         }).then(function () {
             axios.get(redirect_messages_url)
                 .then(function (r) {
