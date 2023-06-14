@@ -10,7 +10,7 @@ let init = (app) => {
     app.data = {
         sugar: Sugar,
         messages: [],
-        selected: null
+        selected: 0
     };
 
     app.enumerate = (a) => {
@@ -28,16 +28,17 @@ let init = (app) => {
 
     app.send_message = function() {
         axios.post(send_message_url, {
-            to: app.vue.selected.uid,
-            message: app.vue.selected.draft
+            to: app.vue.messages[app.vue.selected].uid,
+            message: app.vue.messages[app.vue.selected].draft
         }).then(function () {
+            app.vue.messages[app.vue.selected].draft = "";
             app.get_messages();
-            app.vue.selected.draft = "";
+
         });
     };
 
     app.select = function (row_id) {
-        app.vue.selected = app.vue.messages[row_id];
+        app.vue.selected = row_id;
     };
 
     // This contains all the methods.

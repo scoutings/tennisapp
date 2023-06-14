@@ -73,40 +73,40 @@
     </div>
     
     <div class="column">
-      <div v-if="selected">
+      <div v-if="messages.length">
         <div class="field">
-          <textarea class="textarea" placeholder="Say Hi!" v-model="selected.draft"></textarea>
+          <textarea class="textarea" placeholder="Say Hi!" v-model="messages[selected].draft"></textarea>
+        </div>
         <div class="field">
           <p class="control">
             <button class="button is-link" @click="send">Send</button>
           </p>
         </div>
-        <div v-for="m in selected.messages">
-          <div v-if = "selected.uid == m.sender">
+        <div v-for="m in messages[selected].messages">
+          <div v-if = "messages[selected].uid == m.sender">
             <div class = "container">
-            <span>{{selected.fname}}</span>
-            <span>:</span>
-            <span>{{m.message}}</span>
-            <div class = "time">
-              <span class = "time-right">{{sugar.Date(m.time_sent).relative()}}</span>
+              <span>{{messages[selected].fname}}</span>
+              <span>:</span>
+              <span>{{m.message}}</span>
+              <div class = "time">
+                <span class = "time-right">{{sugar.Date(m.time_sent).relative()}}</span>
+              </div>
             </div>
-          </div>
           </div>
           <div v-else>
             <div class = "container darker">
-            Me
-            <span>:</span>
-            <span>{{m.message}}</span>
-            </marquee>
-            <div class = "time">
-              <span class = "time-left">{{sugar.Date(m.time_sent).relative()}}</span>
+              Me
+              <span>:</span>
+              <span>{{m.message}}</span>
+              <div class = "time">
+                <span class = "time-left">{{sugar.Date(m.time_sent).relative()}}</span>
+              </div>
             </div>
           </div>
-         </div>
         </div>
       </div>
       <div v-else>
-        <p>No user selected</p>
+        <p>You have no messages</p>
       </div>
     </div>
   </div>
