@@ -27,9 +27,22 @@ let init = (app) => {
         stringer.showAbout = !stringer.showAbout; // Toggle the showAbout property
     };
 
+    app.send_message = function (row_id) {
+        axios.post(send_message_url, {
+            to: app.vue.stringers[row_id]['auth_user']['id'],
+            message: "I am interested in stringing!"
+        }).then(function () {
+            axios.get(redirect_messages_url)
+                .then(function (r) {
+                    window.location = r.data.url;
+                });
+        });
+    };
+
     app.methods = {
         get_stringers: app.get_stringers,
-        toggleAbout: app.toggleAbout
+        toggleAbout: app.toggleAbout,
+        send: app.send_message
     };
 
     app.vue = new Vue({

@@ -109,7 +109,7 @@ h1{
                                 Bio
                             </button>
                         </td>
-                        <td><a href="[[=URL('messages')]]" class="button is-info">Contact</a></td>
+                        <td><a class="button is-info" @click="send(s._idx)">Contact</a></td>
                     </tr>
                     <tr v-if="s.showAbout">
                         <td colspan="6" class="about-section">{{s.stringers.about_stringer}}</td>
@@ -129,6 +129,8 @@ h1{
 <!-- Loads the index-specific js for Vue -->
 <script>
     let get_stringers_url = "[[=XML(get_stringers_url)]]"; 
+    let send_message_url = "[[=XML(send_message_url)]]";
+    let redirect_messages_url = "[[=XML(redirect_messages_url)]]";
 </script>
 <script src="../static/js/stringing_find.js"></script>
 [[end]]
