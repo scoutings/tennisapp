@@ -33,7 +33,7 @@ let init = (app) => {
         }).then(function () {
             app.vue.messages[app.vue.selected].draft = "";
             app.get_messages();
-
+            app.vue.selected = 0;
         });
     };
 
