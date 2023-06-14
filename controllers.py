@@ -56,7 +56,8 @@ def coaching_profile():
     return dict(
                 get_coach_info_url=URL('get_coach_info', signer=url_signer),
                 edit_coach_url=URL('edit_coach', signer=url_signer),
-                del_coach_url=URL('del_coach', signer=url_signer)
+                del_coach_url=URL('del_coach', signer=url_signer),
+                redirect_home_url=URL('redirect_home', signer=url_signer)
             )
 
 @action('coaching_find')
@@ -83,7 +84,8 @@ def stringing_profile():
     return dict(
                 get_stringer_info_url=URL('get_stringer_info', signer=url_signer),
                 edit_stringer_url=URL('edit_stringer', signer=url_signer),
-                del_stringer_url=URL('del_stringer', signer=url_signer)
+                del_stringer_url=URL('del_stringer', signer=url_signer),
+                redirect_home_url=URL('redirect_home', signer=url_signer)
             )
 
 @action('stringing_find')
@@ -229,6 +231,13 @@ def edit_stringer():
 def del_stringer():
     db(db.stringers.user_id == auth.current_user.get('id')).delete()
     return "ok"
+
+@action('redirect_home', method="GET")
+@action.uses(url_signer.verify(), db, auth.user)
+def redirect_home():
+    return dict(
+                url=URL('index')
+            )
 
 @action('get_stringer_info')
 @action.uses(url_signer.verify(), db, auth.user)

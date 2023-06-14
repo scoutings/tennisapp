@@ -48,7 +48,13 @@ let init = (app) => {
     };
 
     app.del_coach = function () {
-        axios.post(del_coach_url);
+        axios.post(del_coach_url)
+            .then(function () {
+                axios.get(redirect_home_url)
+                    .then(function (r) {
+                        window.location = r.data.url;
+                    });
+            });
     };
 
     // This contains all the methods.
