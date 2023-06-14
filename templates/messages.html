@@ -4,16 +4,45 @@
 [v-cloak] {
   display: none;
 }
+
+body{
+background-image: url('https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg');
+}
+
+.column-container {
+  display: grid;
+  grid-template-columns: 1fr 200px; /* Adjust the width of the time column as needed */
+  grid-column-gap: 100px; /* Add some space between the message and the time */
+}
+
+.message {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.message-content {
+  margin-right: 100px; /* Add some space between the message and the time */
+}
+
+.time {
+  text-align: right;
+  align-items:center;
+}
+
+
+
 </style>
 
+
 <div class="section" id="vue-target" v-cloak>
+  <h1>Inbox</h1>
   <div class="columns">
-    <div class="column is-one-third">
+    <div class="column is-one-fifth">
       <div v-for="m in messages">
         <div class="field">
           <p class="control">
             <button class="button is-link is-outlined" @click="select(m._idx)">
-              <span>{{m.fname}} {{m.lname}}</span>
+              <span>{{m.fname}}</span>
             </button>
           </p>
         </div>
@@ -22,14 +51,29 @@
     <div class="column">
       <div v-if="selected">
         <div v-for="m in selected.messages">
-          {{m}}
+          <div v-if = "selected.uid == m.sender">
+            <span>{{selected.fname}}</span>
+            <span>:</span>
+            <span>{{m.message}}</span>
+            <div class = "time">
+              {{sugar.Date(m.time_sent).relative()}}
+            </div>
+          </div>
+          <div v-else>
+            Me
+            <span>:</span>
+            <span>{{m.message}}</span>
+            <div class = "time">
+              {{sugar.Date(m.time_sent).relative()}}
+            </div>
+          </div>
         </div>
         <div class="field">
           <textarea class="textarea" placeholder="Say Hi!" v-model="selected.draft"></textarea>
         </div>
         <div class="field">
           <p class="control">
-            <button class="button is-link" @click="send">Send!</button>
+            <button class="button is-link" @click="send">Send</button>
           </p>
         </div>
       </div>

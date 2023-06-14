@@ -62,16 +62,20 @@ h1{
 
 .no_stringers{
     position: relative;
-    margin-left: 550px;
-    margin-top: 150px;
+    margin-left: 520px;
+    margin-top: 50px;
 }
 
 .box{
     margin-top: 30px;
-    width: 1300px;
-    position: absolute;
-    left: -120px;
+    width: 1280px;
+    margin-left: 500px;
+    left: 60%;
+    top: 0;
+    transform: translateX(-50%);
 }
+
+
 </style>
 
 <div class="section" id="vue-target" v-cloak>
@@ -91,7 +95,7 @@ h1{
         </div>
     </div>
     <div v-if="stringers.length === 0" class="no_stringers">
-        No Stringers In This City
+        No Stringers Found In This City
     </div>
     <div v-else class="stringers">
         <div v-for="s in stringers">
@@ -99,10 +103,10 @@ h1{
                 <table class="table is-fullwidth">
                     <tr>
                         <th>Stringer {{s.auth_user.first_name}}</th>
-                        <td>Stringing Experience: {{s.stringers.experience_stringer}} years</td>
+                        <td>Stringing Experience: {{s.stringers.experience}}</td>
                         <td>Price: ${{s.stringers.price_stringer}}/racket</td>
-                        <td>Turnover: ${{s.stringers.turnover_stringer}}hr(s)</td>
-                        <td>
+                        <td>Turnover: {{s.stringers.turnover_stringer}}</td>
+                        <td>    
                             <button class="button is-success is-info"
                                     @mouseover="toggleAbout(s, true)"
                                     @mouseout="toggleAbout(s, false)">

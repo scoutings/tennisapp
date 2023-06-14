@@ -76,13 +76,15 @@ h1{
 
 .no_coaches{
     position: relative;
-    margin-left: 550px;
+    margin-left: 500px;
     margin-top: 150px;
 }
 
 .box{
     margin-top: 30px;
+    width: 1300px;
 }
+
 </style>
 
 <div class="section" id="vue-target" v-cloak>
@@ -96,7 +98,7 @@ h1{
                 <input class="input is-rounded" type="text" placeholder="Search City" v-model="city_q">
             </div>
             <div class="column is-11 is-offset-1">
-                <button class="button is-rounded is-success" @click="get_coaches">Find</button>
+                <button class="button is-rounded is-primary" @click="get_coaches">Find</button>
             </div>
         </div>
     </div>
@@ -109,13 +111,13 @@ h1{
                 <table class="table is-fullwidth">
                     <tr>
                         <th>Coach {{c.auth_user.first_name}}</th>
-                        <td>Coaching Experience: {{c.coaches.experience_coach}} years</td>
+                        <td>Coaching Experience: {{c.coaches.experience_coach}} year(s)</td>
                         <td>Private Rate: ${{c.coaches.private_rate_coach}}/hr</td>
                         <td>Semi Private Rate: ${{c.coaches.semi_private_rate_coach}}/hr</td>
                         <td>Group Rate: ${{c.coaches.group_rate_coach}}/hr</td>
                         <td>Hitting Rate: ${{c.coaches.hitting_rate_coach}}/hr</td>
                         <td>
-                            <button class="button is-warning"
+                            <button class="button is-success"
                                     @mouseover="toggleAbout(c, true)"
                                     @mouseout="toggleAbout(c, false)">
                                 Bio
