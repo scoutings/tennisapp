@@ -4,7 +4,8 @@ let init = (app) => {
     app.data = {
         state_q: "",
         city_q: "",
-        stringers: []
+        stringers: [],
+        self_id: 0
     };
 
     app.enumerate = (a) => {
@@ -39,6 +40,13 @@ let init = (app) => {
         });
     };
 
+    app.set_self_id = function () {
+        axios.get(get_self_id_url)
+            .then(function (r) {
+                app.vue.self_id = r.data.uid;
+            });
+    };
+
     app.methods = {
         get_stringers: app.get_stringers,
         toggleAbout: app.toggleAbout,
@@ -53,6 +61,7 @@ let init = (app) => {
 
     app.init = () => {
         app.get_stringers();
+        app.set_self_id();
     };
 
     app.init();

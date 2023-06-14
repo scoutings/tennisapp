@@ -61,12 +61,13 @@ def coaching_profile():
             )
 
 @action('coaching_find')
-@action.uses('coaching_find.html', db, auth, url_signer)
+@action.uses('coaching_find.html', db, auth.user, url_signer)
 def coaching_find():
     return dict(
                 get_coaches_url=URL('get_coaches', signer=url_signer),
                 send_message_url=URL('send_message', signer=url_signer),
-                redirect_messages_url=URL('redirect_messages', signer=url_signer)
+                redirect_messages_url=URL('redirect_messages', signer=url_signer),
+                get_self_id_url=URL('get_self_id', signer=url_signer)
             )
 
 @action('stringing_apply')
@@ -89,12 +90,13 @@ def stringing_profile():
             )
 
 @action('stringing_find')
-@action.uses('stringing_find.html', db, auth, url_signer)
+@action.uses('stringing_find.html', db, auth.user, url_signer)
 def stringing_find():
     return dict(
                 get_stringers_url=URL('get_stringers', signer=url_signer),
                 send_message_url=URL('send_message', signer=url_signer),
-                redirect_messages_url=URL('redirect_messages', signer=url_signer)
+                redirect_messages_url=URL('redirect_messages', signer=url_signer),
+                get_self_id_url=URL('get_self_id', signer=url_signer)
             )
 
 @action('messages')
@@ -332,6 +334,13 @@ def get_messages():
     messages = sorted(messages, key=lambda x: x['messages'][0]['time_sent'], reverse=True)
     return dict(
                 messages=messages
+            )
+
+@action('get_self_id')
+@action.uses(url_signer.verify(), db, auth.user)
+def get_self_id():
+    return dict(
+                uid=auth.current_user.get('id')
             )
 
 # ============= Helpers =============

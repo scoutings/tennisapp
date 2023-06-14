@@ -103,7 +103,7 @@ h1{
                 <table class="table is-fullwidth">
                     <tr>
                         <th>Stringer {{s.auth_user.first_name}}</th>
-                        <td>Stringing Experience: {{s.stringers.experience}}</td>
+                        <td>Stringing Experience: {{s.stringers.experience_stringer}}</td>
                         <td>Price: ${{s.stringers.price_stringer}}/racket</td>
                         <td>Turnover: {{s.stringers.turnover_stringer}}</td>
                         <td>    
@@ -113,7 +113,9 @@ h1{
                                 Bio
                             </button>
                         </td>
-                        <td><a class="button is-info" @click="send(s._idx)">Contact</a></td>
+                        <td>
+                            <a v-if="s.stringers.user_id != self_id" class="button is-info" @click="send(s._idx)">Contact</a>
+                        </td>
                     </tr>
                     <tr v-if="s.showAbout">
                         <td colspan="6" class="about-section">{{s.stringers.about_stringer}}</td>
@@ -135,6 +137,7 @@ h1{
     let get_stringers_url = "[[=XML(get_stringers_url)]]"; 
     let send_message_url = "[[=XML(send_message_url)]]";
     let redirect_messages_url = "[[=XML(redirect_messages_url)]]";
+    let get_self_id_url = "[[=XML(get_self_id_url)]]";
 </script>
 <script src="../static/js/stringing_find.js"></script>
 [[end]]
