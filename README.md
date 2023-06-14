@@ -1,6 +1,7 @@
-# Vue Start
+This application serves as a valuable platform for individuals seeking coaches and stringers in their local area. With the surge in tennis enthusiasts during the COVID-19 pandemic and the closure of many tennis shops, this application fills a crucial need by connecting people with nearby coaches and stringers. 
 
-This app is the starting point for all of our 
-Vue applications.  To write a new Vue app 
-in py4web, clone this application in your apps 
-folder, and work on it. 
+The website features a user-friendly interface with a navigation bar on each page, consisting of three tabs: Apply, Start Your Journey, and Messages. The Apply tab provides options for individuals interested in becoming coaches or stringers. If someone wishes to apply as a coach, they can navigate to Apply -> Become a Coach, while those aspiring to become stringers can choose Apply -> Become a Stringer. These dedicated pages feature text fields prompting users to provide their phone number, city, state, bio, coaching experience, and set their rates.
+
+Upon submitting their application, a button appears, allowing coaches and stringers to access their profile section. Here, they can conveniently edit or delete their prroile as needed. After applying, the coach or stringer's details will be displayed under Start Your Journey -> Find A Coach or Start Your Journey -> Find A Stringer, respectively. Users can search for a coach or stringer by specifying their state and city, ensuring they discover local professionals. The coaches and stringers are rated on a 5-star scale based on feedback from their clients.
+
+To learn more about a specific coach or stringer, users can hover over their bio to view additional information. The website also facilitates direct messaging between users and professionals. Clicking the Contact button automatically sends an automatic message expressing interest in lessons or stringing services. Users can conveniently schedule a lesson directly with the coach through the website. Furthermore, clients have the opportunity to rate coaches or stringers on a 5-star scale after their initial lesson, providing valuable feedback.
