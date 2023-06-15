@@ -74,6 +74,15 @@
     
     <div class="column">
       <div v-if="messages.length">
+        <span @mouseout="stars_out">
+          <span v-for="star_idx in [1, 2, 3, 4, 5]"
+            @mouseover="stars_over(star_idx)"
+            @click="set_stars(star_idx)"
+          >
+            <i v-if="star_idx <= messages[selected].num_stars_display" class="fa fa-star"></i>
+            <i v-if="star_idx > messages[selected].num_stars_display" class="fa fa-star-o"></i>
+          </span>
+        </span>
         <div class="field">
           <textarea class="textarea" placeholder="Say Hi!" v-model="messages[selected].draft"></textarea>
         </div>
@@ -116,6 +125,8 @@
 <script>
   let send_message_url = "[[=XML(send_message_url)]]";
   let get_messages_url = "[[=XML(get_messages_url)]]";
+  let get_rating_url = "[[=XML(get_rating_url)]]";
+  let set_rating_url = "[[=XML(set_rating_url)]]";
 </script>
 <script src="../static/js/messages.js"></script>
 [[end]]

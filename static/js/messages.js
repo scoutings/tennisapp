@@ -16,13 +16,21 @@ let init = (app) => {
     app.enumerate = (a) => {
         // This adds an _idx field to each element of the array.
         let k = 0;
-        a.map((e) => {e._idx = k++; e.draft = ""});
+        a.map((e) => {e._idx = k++; e.draft = ""; e.num_stars = 0; e.num_stars_display = 0;});
         return a;
     };
 
     app.get_messages = function () {
         axios.get(get_messages_url).then(function (response) {
             app.vue.messages = app.enumerate(response.data.messages);
+        }).then(function () {
+            for (let m of app.vue.messages) {
+                axios.get(get_rating_url, { params: {receiver: m.uid} })
+                    .then(function (result) {
+                        m.num_stars = result.data.rating;
+                        m.num_stars_display = result.data.rating;
+                    });
+            };
         });
     };
 
@@ -41,11 +49,27 @@ let init = (app) => {
         app.vue.selected = row_id;
     };
 
+    app.stars_over = function (num_stars) {
+        app.vue.messages[app.vue.selected].num_stars_display = num_stars;
+    };
+
+    app.stars_out = function () {
+        app.vue.messages[app.vue.selected].num_stars_display = app.vue.messages[app.vue.selected].num_stars;
+    };
+
+    app.set_stars = function (num_stars) {
+        app.vue.messages[app.vue.selected].num_stars = num_stars;
+        axios.post(set_rating_url, {receiver: app.vue.messages[app.vue.selected].uid, rating: num_stars});
+    };
+
     // This contains all the methods.
     app.methods = {
         // Complete as you see fit.
         send: app.send_message,
-        select: app.select
+        select: app.select,
+        stars_over: app.stars_over,
+        stars_out: app.stars_out,
+        set_stars: app.set_stars
     };
 
     // This creates the Vue instance.

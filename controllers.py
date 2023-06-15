@@ -104,7 +104,9 @@ def stringing_find():
 def messages():
     return dict(
                 send_message_url=URL('send_message', signer=url_signer),
-                get_messages_url=URL('get_messages', signer=url_signer)
+                get_messages_url=URL('get_messages', signer=url_signer),
+                get_rating_url=URL('get_rating', signer=url_signer),
+                set_rating_url=URL('set_rating', signer=url_signer)
             )
 
 # ============= API =============
@@ -335,6 +337,37 @@ def get_messages():
     return dict(
                 messages=messages
             )
+
+@action('get_rating')
+@action.uses(url_signer.verify(), db, auth.user)
+def get_rating():
+    rec = request.params.get('receiver')
+    rating = 0
+    rating_q = db((db.star_rating.receiver == rec) & (db.star_rating.user_id == auth.current_user.get('id'))).select().as_list()
+    if len(rating_q):
+        rating = rating_q[0]['rating']
+    print(rating)
+    return dict(
+                rating=rating
+            )
+
+@action('set_rating', method="POST")
+@action.uses(url_signer.verify(), db, auth.user)
+def set_rating():
+    rec = request.json.get('receiver')
+    rating = request.json.get('rating')
+    rating_q = db((db.star_rating.receiver == rec) & (db.star_rating.user_id == auth.current_user.get('id'))).select().as_list()
+    if len(rating_q):
+        db((db.star_rating.receiver == rec) & (db.star_rating.user_id == auth.current_user.get('id'))).update(
+                    rating=rating
+                )
+    else:
+        db.star_rating.insert(
+                    user_id=auth.current_user.get('id'),
+                    receiver=rec,
+                    rating=rating
+                )
+    return "ok"
 
 @action('get_self_id')
 @action.uses(url_signer.verify(), db, auth.user)

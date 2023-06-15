@@ -51,4 +51,10 @@ db.define_table('messages',
                 Field('time_sent', default=datetime.datetime.today().isoformat())
                 )
 
+db.define_table('star_rating',
+                Field('user_id', 'reference auth_user', default=lambda:auth.current_user.get('id')),
+                Field('receiver', 'reference auth_user'),
+                Field('rating', 'integer')
+                )
+
 db.commit()
