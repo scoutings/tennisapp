@@ -103,6 +103,7 @@ h1{
                 <table class="table is-fullwidth">
                     <tr>
                         <th>Stringer {{s.auth_user.first_name}}</th>
+                        <th>{{s.rating}}<i class="fa fa-star"></i></th>
                         <td>Stringing Experience: {{s.stringers.experience_stringer}}</td>
                         <td>Price: ${{s.stringers.price_stringer}}/racket</td>
                         <td>Turnover: {{s.stringers.turnover_stringer}}</td>
@@ -136,6 +137,7 @@ h1{
     let send_message_url = "[[=XML(send_message_url)]]";
     let redirect_messages_url = "[[=XML(redirect_messages_url)]]";
     let get_self_id_url = "[[=XML(get_self_id_url)]]";
+    let get_avg_rating_url = "[[=XML(get_avg_rating_url)]]";
 </script>
 <script src="../static/js/stringing_find.js"></script>
 [[end]]

@@ -26,6 +26,7 @@ Warning: Fixtures MUST be declared with @action.uses({fixtures}) else your app w
 """
 
 import datetime
+from statistics import mean
 
 from py4web import action, request, abort, redirect, URL, Field
 from yatl.helpers import A
@@ -67,7 +68,8 @@ def coaching_find():
                 get_coaches_url=URL('get_coaches', signer=url_signer),
                 send_message_url=URL('send_message', signer=url_signer),
                 redirect_messages_url=URL('redirect_messages', signer=url_signer),
-                get_self_id_url=URL('get_self_id', signer=url_signer)
+                get_self_id_url=URL('get_self_id', signer=url_signer),
+                get_avg_rating_url=URL('get_avg_rating', signer=url_signer)
             )
 
 @action('stringing_apply')
@@ -96,7 +98,8 @@ def stringing_find():
                 get_stringers_url=URL('get_stringers', signer=url_signer),
                 send_message_url=URL('send_message', signer=url_signer),
                 redirect_messages_url=URL('redirect_messages', signer=url_signer),
-                get_self_id_url=URL('get_self_id', signer=url_signer)
+                get_self_id_url=URL('get_self_id', signer=url_signer),
+                get_avg_rating_url=URL('get_avg_rating', signer=url_signer)
             )
 
 @action('messages')
@@ -368,6 +371,19 @@ def set_rating():
                     rating=rating
                 )
     return "ok"
+
+@action('get_avg_rating')
+@action.uses(url_signer.verify(), db, auth.user)
+def get_avg_rating():
+    rating = 6
+    rec = request.params.get('receiver')
+    rating_q = db(db.star_rating.receiver == rec).select().as_list()
+    if len(rating_q):
+        ratings = [r['rating'] for r in rating_q]
+        rating = mean(ratings)
+    return dict(
+                rating=rating
+            )
 
 @action('get_self_id')
 @action.uses(url_signer.verify(), db, auth.user)

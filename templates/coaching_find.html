@@ -109,6 +109,7 @@ h1{
                 <table class="table is-fullwidth">
                     <tr>
                         <th>Coach {{c.auth_user.first_name}}</th>
+                        <th>{{c.rating}}<i class="fa fa-star"></i></th>
                         <td>Coaching Experience: {{c.coaches.experience_coach}} year(s)</td>
                         <td>Private Rate: ${{c.coaches.private_rate_coach}}/hr</td>
                         <td>Semi Private Rate: ${{c.coaches.semi_private_rate_coach}}/hr</td>
@@ -144,6 +145,7 @@ h1{
     let send_message_url = "[[=XML(send_message_url)]]";
     let redirect_messages_url = "[[=XML(redirect_messages_url)]]";
     let get_self_id_url = "[[=XML(get_self_id_url)]]";
+    let get_avg_rating_url = "[[=XML(get_avg_rating_url)]]";
 </script>
 <script src="../static/js/coaching_find.js"></script>
 [[end]]

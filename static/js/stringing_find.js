@@ -13,6 +13,7 @@ let init = (app) => {
         a.map((e) => {
             e._idx = k++;
             e.showAbout = false; // Initialize the showAbout property for each coach
+            e.rating = 6;
         });
         return a;
     };
@@ -21,6 +22,12 @@ let init = (app) => {
         axios.get(get_stringers_url, { params: { state_q: app.vue.state_q, city_q: app.vue.city_q } })
             .then(function (response) {
                 app.vue.stringers = app.enumerate(response.data.stringers);
+                for (let s of app.vue.stringers) {
+                    axios.get(get_avg_rating_url, {params: {receiver: s.auth_user.id} })
+                        .then(function (result) {
+                            s.rating = result.data.rating;
+                        });
+                };
             });
     };
 
