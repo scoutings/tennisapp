@@ -12,6 +12,10 @@ body, html {
     padding: 0;
 }
 
+.gold-star{
+    color: gold;
+}
+
 body {
     background-image: url('https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg');
     background-size: cover;
@@ -46,7 +50,21 @@ body {
     background-color:#f8f8f8;
 }
 
+.rating-stars {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
 
+  .rating-stars i {
+    font-size: 20px;
+    color: gold; 
+    cursor: pointer;
+  }
+
+  .rating-stars i.fa-star {
+    color: #ccc; 
+  }
 
 h1{
     position: absolute;
@@ -84,6 +102,7 @@ h1{
 }
 
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <div class="section" id="vue-target" v-cloak>
     <title>Find Your Coach</title>
     <h1>Find Your Coach</h1>
@@ -109,7 +128,9 @@ h1{
                 <table class="table is-fullwidth">
                     <tr>
                         <th>Coach {{c.auth_user.first_name}}</th>
-                        <th>{{c.rating}}<i class="fa fa-star"></i></th>
+                        <span class = "rating-stars">
+                            <th>{{c.rating}}<i class="fa fa-star gold-star"></i></th>
+                        </span>
                         <td>Coaching Experience: {{c.coaches.experience_coach}} year(s)</td>
                         <td>Private Rate: ${{c.coaches.private_rate_coach}}/hr</td>
                         <td>Semi Private Rate: ${{c.coaches.semi_private_rate_coach}}/hr</td>

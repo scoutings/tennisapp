@@ -9,6 +9,22 @@
   text-align: left;
 }
 
+.rating-stars {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .rating-stars i {
+    font-size: 20px;
+    color: gold; 
+    cursor: pointer;
+  }
+
+  .rating-stars i.fa-star-o {
+    color: #ccc; 
+  }
+
 .scroll-container {
   overflow-y: scroll;
   max-height: 400px; /* Adjust the height as needed */
@@ -56,6 +72,7 @@
   margin-right: 10px; /* Add some spacing between the message and time for the sender's message */
 }
 
+
 </style>
 <div class="section" id="vue-target" v-cloak>
   <h1>Inbox</h1>
@@ -71,16 +88,20 @@
         </div>
       </div>
     </div>
-    
     <div class="column">
       <div v-if="messages.length">
-        <span @mouseout="stars_out">
-          <span v-for="star_idx in [1, 2, 3, 4, 5]"
+        <span v-for = "m in messages">
+          <span>Add Rating for {{m.fname}}</span>
+        </span>
+        <span class = "rating-stars">
+          <span @mouseout= "stars_out">
+            <span v-for="star_idx in [1, 2, 3, 4, 5]" 
             @mouseover="stars_over(star_idx)"
             @click="set_stars(star_idx)"
-          >
+            >
             <i v-if="star_idx <= messages[selected].num_stars_display" class="fa fa-star"></i>
             <i v-if="star_idx > messages[selected].num_stars_display" class="fa fa-star-o"></i>
+            </span>
           </span>
         </span>
         <div class="field">
