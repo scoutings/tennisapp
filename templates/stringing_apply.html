@@ -30,7 +30,6 @@ body{
   margin-top: -100px;
   }
 
-
 .alert {
   display: flex;
   align-items: center;
@@ -39,43 +38,38 @@ body{
   justify-content: center;
   }
 
-  .formstyle {
+.formstyle {
   margin-top: 80px;
   margin-left: 80px;
 }
 
-input[type="text"] {
+  input[type="text"] {
     width: 900px;
-}
+  }
 
-.big-input {
-  height: 170px; /* Adjust the desired height */
-  resize: vertical; /* Allows vertical resizing */
-}
+  .big-input {
+  height: 170px; 
+  resize: vertical;
+  }
 
-/* Replace .input with the appropriate class or selector for your input field */
-.input::placeholder {
-  color: grey /* Replace "red" with your desired color */
-}
+  .input::placeholder {
+  color: grey 
+  }
 
+  .textarea{
+  width: 100px; 
+  height: 170px; 
+  resize: vertical;
+  }
 
-.textarea{
-  width: 100px; /* Adjust the desired width */
-  height: 170px; /* Adjust the desired height */
-  resize: vertical; /* Allows vertical resizing */
-
-
-}
-
-.textarea::placeholder {
+  .textarea::placeholder {
   color: grey;
-}
-
+  }
 
 
 </style>
-
 <div class="section" id="vue-target" v-cloak>
+  <title>Apply to String</title>
   <div v-if="!is_stringer" class="formstyle">
     <div class="container block">
       <div class="section">
@@ -98,7 +92,6 @@ input[type="text"] {
         <div class="field">
           <div class="control">
             <textarea class = "textarea" placeholder="About You (Stringing, Playing Experience)" v-model="add_about"></textarea>
-            <!--<input type="text" placeholder = "About You (Coaching, Playing Experience)" v-model="add_about" class="input big-input"> -->
           </div>
         </div>
         <div class="field">
@@ -139,7 +132,6 @@ input[type="text"] {
       </div>
     </div>
   </div>
-
 </div>
 
 
