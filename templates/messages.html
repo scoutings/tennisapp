@@ -90,9 +90,7 @@
     </div>
     <div class="column">
       <div v-if="messages.length">
-        <span v-for = "m in messages">
-          <span>Add Rating for {{m.fname}}</span>
-        </span>
+        <span>Add Rating for {{messages[selected].fname}}</span>
         <span class = "rating-stars">
           <span @mouseout= "stars_out">
             <span v-for="star_idx in [1, 2, 3, 4, 5]" 
