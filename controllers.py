@@ -315,8 +315,8 @@ def get_messages():
         add_val = {}
         add_val['uid'] = m
         add_val['fname'], add_val['lname'] = get_first_last(m)
-        sent_messages = db(db.messages.sender == c_user and db.messages.to == m).select().as_list()
-        received_messages = db(db.messages.sender == m and db.messages.to == c_user).select().as_list()
+        sent_messages = db((db.messages.sender == c_user) & (db.messages.to == m)).select().as_list()
+        received_messages = db((db.messages.sender == m) & (db.messages.to == c_user)).select().as_list()
         sent_messages = sorted(sent_messages, key=lambda x: x['time_sent'], reverse=True)
         received_messages= sorted(received_messages, key=lambda x: x['time_sent'], reverse=True)
         c_messages = []
