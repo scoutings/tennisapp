@@ -13,7 +13,7 @@ let init = (app) => {
         a.map((e) => {
             e._idx = k++;
             e.showAbout = false; // Initialize the showAbout property for each coach
-            e.rating = 6;
+            e.rating = 0;
         });
         return a;
     };

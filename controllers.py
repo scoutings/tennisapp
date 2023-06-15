@@ -375,7 +375,7 @@ def set_rating():
 @action('get_avg_rating')
 @action.uses(url_signer.verify(), db, auth.user)
 def get_avg_rating():
-    rating = 6
+    rating = 0
     rec = request.params.get('receiver')
     rating_q = db(db.star_rating.receiver == rec).select().as_list()
     if len(rating_q):
